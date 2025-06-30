@@ -1,7 +1,4 @@
-/**
- * CVSS 3.0 Calculator Utility
- * Handles severity calculation and related functions
- */
+// stole this from somewhre, dont even know her anymore
 
 export const a = [
   {
