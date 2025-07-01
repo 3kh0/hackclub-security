@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 // fuck sendgrid man that shit some ass
 export async function shoot(
-  in: {
+  data: {
     id: string
     title: string
     name: string
@@ -19,24 +19,24 @@ export async function shoot(
   try {
     const r = new Resend(apiKey)
     
-    const a = `Security Report: ${in.title}
-ID: ${in.id}
-Reporter: ${in.name}
-Email: ${in.email}
-Type: ${in.vulnType}
-CVSS Score: ${in.cvssScore}
-Severity: ${in.severity}
-Assets: ${in.affectedPrograms.join(', ')}
-Region: ${in.region}
-Time: ${in.timestamp}
+    const a = `Security Report: ${data.title}
+ID: ${data.id}
+Reporter: ${data.name}
+Email: ${data.email}
+Type: ${data.vulnType}
+CVSS Score: ${data.cvssScore}
+Severity: ${data.severity}
+Assets: ${data.affectedPrograms.join(', ')}
+Region: ${data.region}
+Time: ${data.timestamp}
 
 Description:
-${in.description}`
+${data.description}`
 
     await r.emails.send({
       from: 'Hack Club Security Report <tmbx@outbound.3kh0.net>',
       to: ['hcb-security@hackclub.com'], // testing@3kh0.net
-      subject: `HCB Report: ${in.title} [${in.id}]`,
+      subject: `HCB Report: ${data.title} [${data.id}]`,
       html: `<pre style="font-family: monospace; white-space: pre-wrap; background: #f5f5f5; padding: 16px; border-radius: 4px;">${a}</pre>`,
     })
 
