@@ -1,5 +1,6 @@
 import { Catbox } from 'node-catbox'
 import { Readable } from 'stream'
+import { shoot } from '~/server/utils/email'
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
@@ -113,40 +114,70 @@ export default defineEventHandler(async (event) => {
   }
   
   const payout = getPayout(data.vulnType, false)
+  // cuz they wanna be supa special or something
+  const ishcb = data.affectedPrograms.some(program => 
+    typeof program === 'string' && program.toLowerCase().includes('hcb')
+  )
   
   let summary = 'AI fucked up :('
-  try {
-    const ai = await fetch('https://ai.hackclub.com/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        messages: [{
-          role: 'user',
-          content: `Please provide a 2-3 sentence technical summary of this security vulnerability report. Focus on the key technical details and potential impact:
+  if (!ishcb) {
+    try {
+      const ai = await fetch('https://ai.hackclub.com/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [{
+            role: 'user',
+            content: `Please provide a 2-3 sentence technical summary of this security vulnerability report. Focus on the key technical details and potential impact:
 
 Title: ${data.title}
 Type: ${getType(data.vulnType)}
 CVSS Score: ${data.cvssScore}
 Affected Programs: ${data.affectedPrograms.join(', ')}
 Description: ${data.description}`
-        }]
+          }]
+        })
       })
-    })
-    
-    if (ai.ok) {
-      const result = await ai.json()
-      summary = result.choices?.[0]?.message?.content || 'AI summary generation failed'
+      
+      if (ai.ok) {
+        const result = await ai.json()
+        summary = result.choices?.[0]?.message?.content || 'AI summary generation failed'
+      }
+    } catch (error) {
+      console.error('AI error:', error)
     }
-  } catch (error) {
-    console.error('AI error:', error)
+  } else {
+    summary = `RAW REPORT:\n${data.description}`
   }
   
   let link = 'Upload failed :('
-  try {
-    const catbox = new Catbox()
-    const buffer = Buffer.from(`Security Report: ${data.title}
+  if (ishcb) {
+    try {
+      const sent = await shoot({
+        id: submission.id,
+        title: data.title,
+        name: data.name,
+        email: data.email,
+        vulnType: getType(data.vulnType),
+        cvssScore: data.cvssScore,
+        severity: data.severity,
+        affectedPrograms: data.affectedPrograms,
+        region: getRegion(data.region),
+        timestamp: submission.timestamp,
+        description: data.description
+      }, config.resendApiKey)
+      
+      link = sent ? 'email dispatched' : 'fuck, it broke'
+    } catch (error) {
+      console.error('fuck', error)
+      link = 'fuck, it broke'
+    }
+  } else {
+    try {
+      const catbox = new Catbox()
+      const buffer = Buffer.from(`Security Report: ${data.title}
 Submission ID: ${submission.id}
 Reporter: ${data.name}
 Email: ${data.email}
@@ -159,16 +190,17 @@ Submitted: ${submission.timestamp}
 
 Description:
 ${data.description}`, 'utf-8')
-    
-    const upload = await catbox.uploadFileStream({
-      stream: Readable.from(buffer),
-      filename: `security-report-${submission.id}.txt`
-    })
-    
-    link = upload
-  } catch (error) {
-    console.error('Upload error:', error)
-    link = `Upload failed - Description preview: ${data.description.substring(0, 500)}...`
+
+      const upload = await catbox.uploadFileStream({
+        stream: Readable.from(buffer),
+        filename: `${submission.id}.txt`
+      })
+      
+      link = upload
+    } catch (error) {
+      console.error('shit ', error)
+      link = `check logs, upload failed`
+    }
   }
   
   const slack = {

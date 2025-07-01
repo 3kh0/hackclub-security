@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     turnstileSecretKey: process.env.TURNSTILE_SECRET_KEY,
     slackWebhookUrl: process.env.SLACK_WEBHOOK_URL,
+    resendApiKey: process.env.RESEND_API_KEY,
     public: {
       turnstileSiteKey: process.env.TURNSTILE_SITE_KEY
     }
