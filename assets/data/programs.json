@@ -13,6 +13,12 @@
       "domains": ["hackclub.com"]
     },
     {
+      "id": "clubs",
+      "name": "Clubs",
+      "description": "Hack Club's coding club network of over 900+ clubs worldwide",
+      "domains": ["dashboard.hackclub.com", "toolbox.hackclub.com"]
+    },
+    {
       "id": "summer-of-making",
       "name": "Summer of Making",
       "description": "Hack Club's Flagship Summer event for 2025",
