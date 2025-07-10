@@ -37,6 +37,7 @@ ${data.description}`
       from: 'Hack Club Security Report <tmbx@outbound.3kh0.net>',
       to: ['hcb-security@hackclub.com'], // testing@3kh0.net
       subject: `HCB Report: ${data.title} [${data.id}]`,
+      reply_to: data.email,
       html: `<pre style="font-family: monospace; white-space: pre-wrap; background: #f5f5f5; padding: 16px; border-radius: 4px;">${a}</pre>`,
     })
 
