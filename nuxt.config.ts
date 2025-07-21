@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
-  css: ["~/assets/css/main.css"],
+  css: ["~/app/assets/css/main.css"],
   runtimeConfig: {
     turnstileSecretKey: process.env.TURNSTILE_SECRET_KEY,
     slackWebhookUrl: process.env.SLACK_WEBHOOK_URL,
