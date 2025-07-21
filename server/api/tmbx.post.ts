@@ -1,6 +1,6 @@
 import { Catbox } from 'node-catbox'
 import { Readable } from 'stream'
-import { shoot } from '~/server/utils/email'
+import { shoot } from './../utils/email'
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
