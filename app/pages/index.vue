@@ -1,8 +1,14 @@
 <template>
   <div class="min-h-screen bg-darker p-2 md:p-4">
     <div class="max-w-6xl mx-auto space-y-8">
-      <div class="text-center my-12">
+      <div class="text-center my-12 relative">
         <h1 class="text-6xl md:text-7xl font-bold p-4 mb-4 bg-gradient-to-r from-primary to-orange bg-clip-text text-transparent">Hack Club Security Program</h1>
+        <div
+          id="c"
+          class="hidden absolute right-0 bottom-0 font-[Minecraft] -translate-x-1/4 -translate-y-1/2 rotate-[-15deg] text-[#fdfd0e] font-bold text-xl s" style="z-index:10;"
+        >
+          <a href="https://hcb.hackclub.com/hack-club-security/transactions" target="_blank" rel="noopener noreferrer" class="hover:text-blue/80 transition-colors">$<span id="a"></span> paid out!</a>
+        </div>
       </div>
       <div class="bg-dark p-8 rounded-2xl">
         <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
@@ -226,5 +232,22 @@ useHead({
       content: 'Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program.'
     }
   ]
+})
+
+onMounted(() => {
+  const p = document.getElementById('a')
+  const pc = document.getElementById('c')
+  if (p) {
+    fetch('/api/udx')
+      .then(response => response.json())
+      .then(data => {
+        p.textContent = data.t.toLocaleString()
+        pc.classList.remove('hidden')
+      })
+      .catch(error => {
+        console.error('wuh', error)
+        p.textContent = '1,000'
+      })
+  }
 })
 </script>

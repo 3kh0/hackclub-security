@@ -30,6 +30,16 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "minecraft";
+  src:
+    url("~/assets/fonts/minecraft.woff2") format("woff2"),
+    url("~/assets/fonts/minecraft.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* hack clubs brand kit, stolen from their website :3 */
   --color-darker: #121217;
@@ -50,4 +60,20 @@ html,
 body {
   background-color: var(--color-darker);
   font-family: "Phantom Sans", sans-serif;
+}
+
+.s {
+  animation: s 1.5s infinite;
+}
+
+@keyframes s {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
