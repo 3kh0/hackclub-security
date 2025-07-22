@@ -31,6 +31,12 @@
       "domains": ["hackatime.hackclub.com"]
     },
     {
+      "id": "daydream",
+      "name": "Daydream",
+      "description": "A game jam being held across 100 cities in the whole wide world",
+      "domains": ["daydream.hackclub.com"]
+    },
+    {
       "id": "identity",
       "name": "Hack Club Identity",
       "description": "Hack Club's Identity Verification Platform, also known as Identity Vault",

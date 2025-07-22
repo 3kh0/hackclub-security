@@ -22,7 +22,7 @@
             <ul class="list-disc list-inside space-y-1">
               <li>
                 Allen earned a
-                <a href="https://ading.dev/blog/posts/chrome_sandbox_escape.html" target="_blank" rel="noopener noreferrer" class="font-bold text-blue hover:text-blue/80 transition-colors"> $20k bounty for a Chromium bug </a>.
+                <a href="https://ading.dev/blog/posts/chrome_sandbox_escape.html" target="_blank" rel="noopener noreferrer" class="font-bold text-blue hover:text-blue/80 transition-colors">$20k bounty for a Chromium bug</a>.
               </li>
               <li>Echo participated in the <span class="font-bold">Coinbase Security Bounty Program</span>.</li>
             </ul>
