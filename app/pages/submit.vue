@@ -404,7 +404,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, computed, nextTick } from 'vue'
-import data from '~/assets/data/programs.json'
+import p from '@/assets/data/programs.json'
 import { a, calc, l, c } from '~/utils/cvss'
 
 useHead({
@@ -436,8 +436,6 @@ const steps = [
   { title: 'Details' },
   { title: 'Submit' }
 ]
-
-const p = data.programs
 
 const v = [
   { id: 'rce-root', name: 'Remote Code Execution (Root)', description: 'Root access to servers', payout: '$500' },

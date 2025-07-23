@@ -221,8 +221,7 @@
 </template>
 
 <script setup>
-import data from '@/assets/data/programs.json'
-const programs = data.programs
+import programs from '@/assets/data/programs.json'
 
 useHead({
   title: 'Hack Club Security Bounty Program',

@@ -1,94 +1,92 @@
-{
-  "programs": [
-    {
-      "id": "hcb",
-      "name": "HCB",
-      "description": "Fiscal sponsorship platform for student organizations and non-profits",
-      "domains": ["hcb.hackclub.com", "bank.engineering"]
-    },
-    {
-      "id": "hackclub-com",
-      "name": "Hack Club Website",
-      "description": "Main homepage for Hack Club",
-      "domains": ["hackclub.com"]
-    },
-    {
-      "id": "clubs",
-      "name": "Clubs",
-      "description": "Hack Club's coding club network of over 900+ clubs worldwide",
-      "domains": ["dashboard.hackclub.com", "toolbox.hackclub.com"]
-    },
-    {
-      "id": "summer-of-making",
-      "name": "Summer of Making",
-      "description": "Hack Club's Flagship Summer event for 2025",
-      "domains": ["summer.hackclub.com"]
-    },
-    {
-      "id": "hackatime",
-      "name": "Hackatime",
-      "description": "Hack Club's in-house time tracking software",
-      "domains": ["hackatime.hackclub.com"]
-    },
-    {
-      "id": "daydream",
-      "name": "Daydream",
-      "description": "A game jam being held across 100 cities in the whole wide world",
-      "domains": ["daydream.hackclub.com"]
-    },
-    {
-      "id": "identity",
-      "name": "Hack Club Identity",
-      "description": "Hack Club's Identity Verification Platform, also known as Identity Vault",
-      "domains": ["identity.hackclub.com"]
-    },
-    {
-      "id": "shipwrecked",
-      "name": "Shipwrecked",
-      "description": "Shipwrecked is a Club summer event going from August 8-11 on an island in the Boston Harbor!",
-      "domains": ["shipwrecked.hackclub.com"]
-    },
-    {
-      "id": "smelt",
-      "name": "Smelt",
-      "description": "Build a Svelte/SvelteKit website and get Svelted Rewards for your efforts!",
-      "domains": ["smelt.hackclub.com"]
-    },
-    {
-      "id": "gemini",
-      "name": "Gemini",
-      "description": "You ship an Android app, we ship an Android phone",
-      "domains": ["gemini.hackclub.com"]
-    },
-    {
-      "id": "cider",
-      "name": "Cider",
-      "description": "You ship an iOS app, we ship Apple Developer license",
-      "domains": ["cider.hackclub.com"]
-    },
-    {
-      "id": "waffles",
-      "name": "Waffles",
-      "description": "Make a website with HTML, CSS and a little spread of JavaScript and get free waffles",
-      "domains": ["waffles.hackclub.com"]
-    },
-    {
-      "id": "swirl",
-      "name": "Swirl",
-      "description": "Get ice cream for shipping a website!",
-      "domains": ["swirl.hackclub.com"]
-    },
-    {
-      "id": "toppings",
-      "name": "Toppings",
-      "description": "Add more CSS to your site get toppings",
-      "domains": ["toppings.hackclub.com"]
-    },
-    {
-      "id": "grub",
-      "name": "Grub",
-      "description": "Build a website using Tailwind CSS Get Junk Food!",
-      "domains": ["grub.hackclub.com"]
-    }
-  ]
-}
+[
+  {
+    "id": "hcb",
+    "name": "HCB",
+    "description": "Fiscal sponsorship platform for student organizations and non-profits",
+    "domains": ["hcb.hackclub.com", "bank.engineering"]
+  },
+  {
+    "id": "hackclub-com",
+    "name": "Hack Club Website",
+    "description": "Main homepage for Hack Club",
+    "domains": ["hackclub.com"]
+  },
+  {
+    "id": "clubs",
+    "name": "Clubs",
+    "description": "Hack Club's coding club network of over 900+ clubs worldwide",
+    "domains": ["dashboard.hackclub.com", "toolbox.hackclub.com"]
+  },
+  {
+    "id": "summer-of-making",
+    "name": "Summer of Making",
+    "description": "Hack Club's Flagship Summer event for 2025",
+    "domains": ["summer.hackclub.com"]
+  },
+  {
+    "id": "hackatime",
+    "name": "Hackatime",
+    "description": "Hack Club's in-house time tracking software",
+    "domains": ["hackatime.hackclub.com"]
+  },
+  {
+    "id": "daydream",
+    "name": "Daydream",
+    "description": "A game jam being held across 100 cities in the whole wide world",
+    "domains": ["daydream.hackclub.com"]
+  },
+  {
+    "id": "identity",
+    "name": "Hack Club Identity",
+    "description": "Hack Club's Identity Verification Platform, also known as Identity Vault",
+    "domains": ["identity.hackclub.com"]
+  },
+  {
+    "id": "shipwrecked",
+    "name": "Shipwrecked",
+    "description": "Shipwrecked is a Club summer event going from August 8-11 on an island in the Boston Harbor!",
+    "domains": ["shipwrecked.hackclub.com"]
+  },
+  {
+    "id": "smelt",
+    "name": "Smelt",
+    "description": "Build a Svelte/SvelteKit website and get Svelted Rewards for your efforts!",
+    "domains": ["smelt.hackclub.com"]
+  },
+  {
+    "id": "gemini",
+    "name": "Gemini",
+    "description": "You ship an Android app, we ship an Android phone",
+    "domains": ["gemini.hackclub.com"]
+  },
+  {
+    "id": "cider",
+    "name": "Cider",
+    "description": "You ship an iOS app, we ship Apple Developer license",
+    "domains": ["cider.hackclub.com"]
+  },
+  {
+    "id": "waffles",
+    "name": "Waffles",
+    "description": "Make a website with HTML, CSS and a little spread of JavaScript and get free waffles",
+    "domains": ["waffles.hackclub.com"]
+  },
+  {
+    "id": "swirl",
+    "name": "Swirl",
+    "description": "Get ice cream for shipping a website!",
+    "domains": ["swirl.hackclub.com"]
+  },
+  {
+    "id": "toppings",
+    "name": "Toppings",
+    "description": "Add more CSS to your site get toppings",
+    "domains": ["toppings.hackclub.com"]
+  },
+  {
+    "id": "grub",
+    "name": "Grub",
+    "description": "Build a website using Tailwind CSS Get Junk Food!",
+    "domains": ["grub.hackclub.com"]
+  }
+]
