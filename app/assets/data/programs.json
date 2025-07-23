@@ -55,6 +55,18 @@
       "domains": ["smelt.hackclub.com"]
     },
     {
+      "id": "gemini",
+      "name": "Gemini",
+      "description": "You ship an Android app, we ship an Android phone",
+      "domains": ["gemini.hackclub.com"]
+    },
+    {
+      "id": "cider",
+      "name": "Cider",
+      "description": "You ship an iOS app, we ship Apple Developer license",
+      "domains": ["cider.hackclub.com"]
+    },
+    {
       "id": "waffles",
       "name": "Waffles",
       "description": "Make a website with HTML, CSS and a little spread of JavaScript and get free waffles",
