@@ -49,6 +49,12 @@
       "domains": ["shipwrecked.hackclub.com"]
     },
     {
+      "id": "smelt",
+      "name": "Smelt",
+      "description": "Build a Svelte/SvelteKit website and get Svelted Rewards for your efforts!",
+      "domains": ["smelt.hackclub.com"]
+    },
+    {
       "id": "waffles",
       "name": "Waffles",
       "description": "Make a website with HTML, CSS and a little spread of JavaScript and get free waffles",
