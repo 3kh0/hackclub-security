@@ -5,22 +5,9 @@ import { shoot } from './../utils/email'
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const body = await readBody(event)
-  
-  if (!config.turnstileSecretKey) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Server configuration error'
-    })
-  }
-  
-  if (!body.turnstileToken) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'CAPTCHA verification required'
-    })
-  }
-
-  const verify = await verifyTurnstile(body.turnstileToken, config.turnstileSecretKey)
+  // why are we doing so much validation?
+  // well it would be so funny if the security program got hacked
+  const verify = await verifyTurnstile(body.turnstileToken, config.tprivate)
   if (!verify.success) {
     throw createError({
       statusCode: 400,
@@ -167,7 +154,7 @@ Description: ${data.description}`
         region: getRegion(data.region),
         timestamp: submission.timestamp,
         description: data.description
-      }, config.resendApiKey)
+      }, config.ekey)
       
       link = sent ? 'email dispatched' : 'fuck, it broke'
     } catch (error) {
@@ -276,7 +263,7 @@ ${data.description}`, 'utf-8')
   }
 
   try {
-    const webhook = config.slackWebhookUrl
+    const webhook = config.webhook
     
     const response = await fetch(webhook, {
       method: 'POST',

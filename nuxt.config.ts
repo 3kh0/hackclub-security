@@ -6,11 +6,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   runtimeConfig: {
-    turnstileSecretKey: process.env.TURNSTILE_SECRET_KEY,
-    slackWebhookUrl: process.env.SLACK_WEBHOOK_URL,
-    resendApiKey: process.env.RESEND_API_KEY,
+    tprivate: process.env.TURNSTILE_SECRET_KEY,
+    webhook: process.env.SLACK_WEBHOOK_URL,
+    ekey: process.env.RESEND_API_KEY,
     public: {
-      turnstileSiteKey: process.env.TURNSTILE_SITE_KEY
+      tpublic: process.env.TURNSTILE_SITE_KEY
     }
   },
   app: {
