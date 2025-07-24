@@ -8,8 +8,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program.'
-      og:URL: 'https://hackclub.com/security'
+      content: 'Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program.',
+      property: 'og:url',
+      content: 'https://hackclub.com/security'
     }
   ]
 })
