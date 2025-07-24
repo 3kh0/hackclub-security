@@ -21,8 +21,12 @@ export default defineNuxtConfig({
         { charset: "utf-8" },
         {
           name: "description",
-          content: "Information about Hack Club's Security program",
+          content: "Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program.",
         },
+        { property: "og:site_name", content: "Hack Club Security Program" },
+        { property: "og:title", content: "Hack Club Security Program" },
+        { property: "og:description", content: "Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program." },
+        { property: "og:url", content: "https://security.hackclub.com" }
       ],
       htmlAttrs: {
         lang: "en",

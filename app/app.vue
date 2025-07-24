@@ -5,13 +5,5 @@
 <script setup>
 useHead({
   title: 'Hack Club Security Bounty Program',
-  meta: [
-    {
-      name: 'description',
-      content: 'Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program.',
-      property: 'og:url',
-      content: 'https://hackclub.com/security'
-    }
-  ]
 })
 </script>
