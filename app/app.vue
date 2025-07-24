@@ -9,6 +9,7 @@ useHead({
     {
       name: 'description',
       content: 'Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program.'
+      og:URL: 'https://hackclub.com/security'
     }
   ]
 })
