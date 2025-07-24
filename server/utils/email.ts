@@ -6,13 +6,14 @@ export async function shoot(
     title: string
     name: string
     email: string
+    slackId?: string
     vulnType: string
-    cvssScore: number
     severity: string
     affectedPrograms: string[]
     region: string
     timestamp: string
     description: string
+    estimatedPayout: string
   },
   apiKey: string
 ): Promise<boolean> {
@@ -22,10 +23,10 @@ export async function shoot(
     const a = `Security Report: ${data.title}
 ID: ${data.id}
 Reporter: ${data.name}
-Email: ${data.email}
+Email: ${data.email}${data.slackId ? `\nSlack ID: ${data.slackId}` : ''}
 Type: ${data.vulnType}
-CVSS Score: ${data.cvssScore}
 Severity: ${data.severity}
+Estimated Payout: ${data.estimatedPayout}
 Assets: ${data.affectedPrograms.join(', ')}
 Region: ${data.region}
 Time: ${data.timestamp}
