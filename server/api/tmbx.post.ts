@@ -117,7 +117,7 @@ export default defineEventHandler(async (event) => {
         body: JSON.stringify({
           messages: [{
             role: 'user',
-            content: `Please provide a 2-3 sentence technical summary of this security vulnerability report. Focus on the key technical details and potential impact:
+            content: `Please provide a 2-3 sentence technical summary of this security vulnerability report. Focus on the key technical details and potential impact:/no_think
 
 Title: ${data.title}
 Type: ${getType(data.vulnType)}
