@@ -60,7 +60,7 @@ async function logout() {
 }
 
 onMounted(async () => {
-  const res = await fetch("/api/reports");
+  const res = await fetch("/api/backend/reports");
   if (res.ok) {
     reports.value = await res.json();
   }

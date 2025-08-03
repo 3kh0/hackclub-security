@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-export async function shoot(email: string, code: string, apiKey: string): Promise<boolean> {
+export async function shot(email: string, code: string, apiKey: string): Promise<boolean> {
   try {
     const r = new Resend(apiKey);
     await r.emails.send({

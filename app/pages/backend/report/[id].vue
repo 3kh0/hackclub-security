@@ -60,7 +60,7 @@ const status = ref('open')
 const error = ref(false)
 
 async function fetchReport() {
-  const res = await fetch(`/api/report/${route.params.id}`)
+  const res = await fetch(`/api/backend/report/${route.params.id}`)
   if (res.ok) {
     const data = await res.json()
     if (data.error) {
