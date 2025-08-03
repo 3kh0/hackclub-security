@@ -35,7 +35,7 @@ async function verifyCode() {
   <div class="min-h-screen flex items-center justify-center">
     <form v-if="step === 1" @submit.prevent="r" class="bg-dark p-8 rounded-2xl shadow-lg w-full max-w-md">
       <h2 class="text-2xl font-bold text-white mb-4 text-center">ello!</h2>
-      <p class="text-secondary mb-4 text-center">drop your email and ill shoot ya a code. if your not on the list, you wont get anything, so dont try</p>
+      <p class="text-secondary mb-4 text-center">drop your email and ill shoot ya a code to login.</p>
       <div class="mb-6">
         <input v-model="email" type="email" placeholder="Email" class="w-full p-3 rounded bg-darker border border-darkless text-white focus:outline-none focus:ring-2 focus:ring-primary" />
       </div>
@@ -45,7 +45,7 @@ async function verifyCode() {
     </form>
     <form v-else @submit.prevent="verifyCode" class="bg-dark p-8 rounded-2xl shadow-lg w-full max-w-md">
       <h2 class="text-2xl font-bold text-white mb-4 text-center">sent ya a pin!</h2>
-      <p class="text-secondary mb-4 text-center">just sent ya the code! check ya email and drop it below:</p>
+      <p class="text-secondary mb-4 text-center">if your in the club, i just sent you a code! check ya email and drop it below:</p>
       <div class="mb-6">
         <input v-model="code" type="number" maxlength="6" placeholder="000000" class="w-full p-3 rounded bg-darker border border-darkless text-white focus:outline-none focus:ring-2 focus:ring-primary font-mono" />
       </div>
