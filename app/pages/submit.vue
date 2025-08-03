@@ -79,11 +79,11 @@
             <div class="grid md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-lg text-white font-medium mb-2">How should we address you? *</label>
-                <input v-model="form.name" type="text" required class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none" placeholder="What should we call you?" />
+                <input v-model="form.name" type="text" required class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none" placeholder="Spongebob" />
               </div>
               <div>
                 <label class="block text-lg text-white font-medium mb-2">What is your email? *</label>
-                <input v-model="form.email" type="email" required class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none" placeholder="researcher@secure.com" />
+                <input v-model="form.email" type="email" required class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none" placeholder="spongebob@bikinibottom.com" />
               </div>
             </div>
 
@@ -98,11 +98,12 @@
                 <select v-model="form.region" required class="w-full p-3 rounded-lg h-[54px] bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none">
                   <option value="">Select your region</option>
                   <option value="us">United States</option>
-                  <option value="canada">Canada</option>
+                  <option value="ca">Canada</option>
                   <option value="eu">European Union</option>
                   <option value="uk">United Kingdom</option>
-                  <option value="australia">Australia</option>
-                  <option value="asia">Asia Pacific</option>
+                  <option value="in">India</option>
+                  <option value="au">Australia</option>
+                  <option value="as">Asia Pacific</option>
                   <option value="other">Other</option>
                 </select>
                 <p class="text-sm text-secondary mt-1">This is to help with payouts!</p>
@@ -111,13 +112,11 @@
           </div>
         </div>
 
-        <!-- Affected Programs -->
         <div class="bg-dark p-8 rounded-2xl">
           <div class="mb-6">
             <h3 class="text-3xl font-bold text-white mb-2">What is affected?</h3>
             <p class="text-lg text-secondary">What is impacted by this vulnerability? Select all that apply.</p>
           </div>
-
           <div class="grid md:grid-cols-2 gap-4">
             <div v-for="program in programs" :key="program.id" class="p-4 rounded-lg border transition-colors cursor-pointer" :class="form.affected.includes(program.id) ? 'bg-primary/20 border-primary text-white' : 'bg-darker border-darkless text-secondary hover:border-white/40'" @click="toggleProgram(program.id)">
               <div class="flex items-start space-x-3">
@@ -129,7 +128,6 @@
                 </div>
               </div>
             </div>
-
             <div class="p-4 rounded-lg border transition-colors cursor-pointer" :class="form.affected.includes('other') ? 'bg-primary/20 border-primary text-white' : 'bg-darker border-darkless text-secondary hover:border-white/40'" @click="toggleProgram('other')">
               <div class="flex items-start space-x-3">
                 <input type="checkbox" :checked="form.affected.includes('other')" class="mt-1 w-4 h-4 text-primary bg-darker border-darkless rounded focus:ring-primary" @change="toggleProgram('other')" />
@@ -150,7 +148,6 @@
             <h3 class="text-3xl font-bold text-white mb-2">How bad's the damage?</h3>
             <p class="text-lg text-secondary">This helps us figure out how urgent the matter is and the potential impact on users.</p>
           </div>
-
           <div class="space-y-6">
             <div class="bg-darker p-4 rounded-lg">
               <label class="block text-lg text-white font-medium mb-3">Can someone exploit this vulnerability from the internet?</label>
@@ -194,14 +191,11 @@
             </div>
           </div>
         </div>
-
-        <!-- Report Details -->
         <div class="bg-dark p-8 rounded-2xl">
           <div class="mb-6">
             <h3 class="text-3xl font-bold text-white mb-2">What's the deets?</h3>
             <p class="text-lg text-secondary">Give us the lowdown on the vulnerability. Be as detailed as possible.</p>
           </div>
-
           <div class="space-y-6">
             <div>
               <label class="block text-lg text-white font-medium mb-2">Report Title *</label>
