@@ -3,16 +3,13 @@
     <div class="max-w-6xl mx-auto space-y-8">
       <div class="text-center my-12 relative">
         <h1 class="text-6xl md:text-7xl font-bold p-4 mb-4 bg-gradient-to-r from-primary to-orange bg-clip-text text-transparent">Hack Club Security Program</h1>
-        <div
-          id="c"
-          class="hidden absolute right-0 bottom-0 font-[Minecraft] -translate-x-1/4 -translate-y-1/2 rotate-[-15deg] text-[#fdfd0e] font-bold text-xl s" style="z-index:10;"
-        >
+        <div id="c" class="hidden absolute right-0 bottom-0 font-[Minecraft] -translate-x-1/4 -translate-y-1/2 rotate-[-15deg] text-[#fdfd0e] font-bold text-xl s" style="z-index: 10">
           <a href="https://hcb.hackclub.com/hack-club-security/transactions" target="_blank" rel="noopener noreferrer" class="hover:text-blue/80 transition-colors">$<span id="a"></span> paid out!</a>
         </div>
       </div>
       <div class="bg-dark p-8 rounded-2xl">
         <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
-          <img src="@/assets/s.png" alt="meow" class="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain flex-shrink-0">
+          <img src="@/assets/s.png" alt="meow" class="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain flex-shrink-0" />
           <div class="max-w-2xl text-secondary text-xl space-y-4 flex flex-col justify-center h-full">
             <p>
               Hi! I’m
@@ -89,7 +86,7 @@
 
           <h2 class="text-2xl font-bold mb-4 text-white">Payout Tiers</h2>
           <p class="text-xl text-secondary mb-4">As a thank you for helping us keep Hack Club secure, we are offering bounties for finding vulnerabilities in our systems. The payouts are based on the severity of the vulnerability and the impact it has on our users.</p>
-          
+
           <h3 class="text-xl font-bold mb-4 text-white">PII Bounty Tiers</h3>
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             <div class="p-6 bg-orange/10 border border-orange/30 rounded-xl">
@@ -185,7 +182,7 @@
             </ul>
           </div>
         </div>
-        
+
         <div class="my-4">
           <h1 class="text-2xl font-bold mb-4 text-white">Notice for AI Generated Reports</h1>
           <p class="text-lg text-secondary">Bounty programs have seen AI-generated submissions that lack any real-world impact. While the use of AI as a tool to help improve your report is allowed, submissions that are entirely AI-generated with no original researcher input will not be accepted. We are looking for original research with real-world impact. AI should support your research, not replace it.</p>
@@ -195,12 +192,7 @@
           <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
             <h3 class="text-2xl font-bold mb-4 text-primary">How to Report</h3>
             <p class="text-secondary mb-4">Submit vulnerabilities via this site, and we will pursue further contact via email</p>
-            <nuxt-link 
-              to="/submit"
-              class="inline-block px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/80 transition-colors"
-            >
-              Submit Report →
-            </nuxt-link>
+            <nuxt-link to="/submit" class="inline-block px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/80 transition-colors"> Submit Report → </nuxt-link>
           </div>
 
           <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
@@ -211,7 +203,6 @@
             <p class="text-md text-secondary mt-4">If these payout options do not work, we will try our best to figure out the best possible way to award you. The program in which the vulnerability is found will cover the cost of the payout.</p>
           </div>
         </div>
-
       </div>
       <div class="text-center mb-6">
         <p class="text-secondary text-md">Run by <span class="text-primary font-bold">Allen</span> and <span class="text-primary font-bold">Echo</span>, website by <span class="text-primary font-bold">Echo</span> • Art by <a href="https://bunnyguy.foo/" target="_blank" rel="noopener noreferrer" class="text-primary font-semibold hover:text-primary/80 transition-colors underline">bunnyguy</a> • We are on <a href="https://hcb.hackclub.com/hack-club-security" target="_blank" rel="noopener noreferrer" class="text-primary font-semibold hover:text-primary/80 transition-colors underline">HCB</a></p>
@@ -221,32 +212,32 @@
 </template>
 
 <script setup>
-import programs from '@/assets/data/programs.json'
+import programs from "@/assets/data/programs.json";
 
 useHead({
-  title: 'Hack Club Security Bounty Program',
+  title: "Hack Club Security Bounty Program",
   meta: [
     {
-      name: 'description',
-      content: 'Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program.'
-    }
-  ]
-})
+      name: "description",
+      content: "Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program.",
+    },
+  ],
+});
 
 onMounted(() => {
-  const p = document.getElementById('a')
-  const pc = document.getElementById('c')
+  const p = document.getElementById("a");
+  const pc = document.getElementById("c");
   if (p) {
-    fetch('/api/udx')
-      .then(response => response.json())
-      .then(data => {
-        p.textContent = data.t.toLocaleString()
-        pc.classList.remove('hidden')
+    fetch("/api/udx")
+      .then((response) => response.json())
+      .then((data) => {
+        p.textContent = data.t.toLocaleString();
+        pc.classList.remove("hidden");
       })
-      .catch(error => {
-        console.error('wuh', error)
-        p.textContent = '1,000'
-      })
+      .catch((error) => {
+        console.error("wuh", error);
+        p.textContent = "1,000";
+      });
   }
-})
+});
 </script>

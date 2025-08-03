@@ -4,6 +4,6 @@
 
 <script setup>
 useHead({
-  title: 'Hack Club Security Bounty Program',
-})
+  title: "Hack Club Security Bounty Program",
+});
 </script>

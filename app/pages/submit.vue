@@ -2,12 +2,8 @@
   <div class="min-h-screen bg-darker p-2 md:p-4">
     <div class="max-w-6xl mx-auto space-y-8">
       <div class="text-center my-12">
-        <h1 class="text-6xl md:text-7xl font-bold p-4 mb-4 bg-gradient-to-r from-primary to-orange bg-clip-text text-transparent">
-          Submit Security Report
-        </h1>
-        <p class="text-xl text-secondary max-w-2xl mx-auto">
-          Help us keep Hack Club secure by reporting vulnerabilities here
-        </p>
+        <h1 class="text-6xl md:text-7xl font-bold p-4 mb-4 bg-gradient-to-r from-primary to-orange bg-clip-text text-transparent">Submit Security Report</h1>
+        <p class="text-xl text-secondary max-w-2xl mx-auto">Help us keep Hack Club secure by reporting vulnerabilities here</p>
       </div>
 
       <form @submit.prevent="handleSubmit" class="space-y-8">
@@ -19,7 +15,9 @@
 
           <div class="space-y-4 text-white max-h-96 overflow-y-auto bg-darker p-4 rounded-lg mb-6">
             <div class="space-y-3 text-md">
-              <p><i>Adpted from the <a href="https://www.hackerone.com/terms/disclosure-guidelines" target="_blank" class="text-primary">HackerOne Vulnerability Disclosure Guidelines</a></i></p>
+              <p>
+                <i>Adpted from the <a href="https://www.hackerone.com/terms/disclosure-guidelines" target="_blank" class="text-primary">HackerOne Vulnerability Disclosure Guidelines</a></i>
+              </p>
               <p>Thank you for taking the time read this! We're excited to hear from you and your findings, but we want to make sure that we are all on the same page about what's allowed and what's not.</p>
               <p>In this program, we have two parties, the finders and the security team.</p>
               <h4 class="text-lg font-bold mt-4 mb-2">Finders should...</h4>
@@ -61,20 +59,13 @@
               <h4 class="text-lg font-bold mt-4 mb-2">Notice for AI Generated Reports</h4>
               <p>Bounty programs have seen AI-generated submissions that lack any real-world impact. While the use of AI as a tool to help improve your report is allowed, submissions that are entirely AI-generated with no original researcher input will not be accepted. We are looking for original research with real-world impact. AI should support your research, not replace it.</p>
               <h4 class="text-lg font-bold mt-4 mb-2">Anything else?</h4>
-              <p>
-                We reserve the right to make changes to this at any time, with or without notice. We also reserve the right to make the final decision about a report's validity, including whether it qualifies for a bounty. Reward payouts are at our discretion and may vary based on the severity and impact of the issue, as well as the quality of the actual report. While we will use the payout guidelines as a reference, we may adjust payouts based on the specific circumstances of each report. We promise to be fair in our decisions and to act in good faith in all cases, in that commitment, we ask that you also act in good faith when submitting reports and respect our decisions regarding the validity of a report and any associated rewards.
-              </p>
+              <p>We reserve the right to make changes to this at any time, with or without notice. We also reserve the right to make the final decision about a report's validity, including whether it qualifies for a bounty. Reward payouts are at our discretion and may vary based on the severity and impact of the issue, as well as the quality of the actual report. While we will use the payout guidelines as a reference, we may adjust payouts based on the specific circumstances of each report. We promise to be fair in our decisions and to act in good faith in all cases, in that commitment, we ask that you also act in good faith when submitting reports and respect our decisions regarding the validity of a report and any associated rewards.</p>
               <h4 class="text-lg font-bold mt-4 mb-2">By submitting a report, you agree to the above terms and rules, and you confirm that you have read and understood them.</h4>
             </div>
           </div>
 
           <label class="flex items-center space-x-3 cursor-pointer">
-            <input 
-              v-model="form.termsAccepted" 
-              type="checkbox" 
-              required
-              class="w-5 h-5 text-primary bg-darker border border-darkless rounded focus:ring-primary"
-            >
+            <input v-model="form.termsAccepted" type="checkbox" required class="w-5 h-5 text-primary bg-darker border border-darkless rounded focus:ring-primary" />
             <span class="text-white font-medium">I have read and accept the terms and rules above to submit my report.</span>
           </label>
         </div>
@@ -88,44 +79,23 @@
             <div class="grid md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-lg text-white font-medium mb-2">How should we address you? *</label>
-                <input 
-                  v-model="form.name" 
-                  type="text" 
-                  required
-                  class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none"
-                  placeholder="What should we call you?"
-                >
+                <input v-model="form.name" type="text" required class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none" placeholder="What should we call you?" />
               </div>
               <div>
                 <label class="block text-lg text-white font-medium mb-2">What is your email? *</label>
-                <input 
-                  v-model="form.email" 
-                  type="email" 
-                  required
-                  class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none"
-                  placeholder="researcher@secure.com"
-                >
+                <input v-model="form.email" type="email" required class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none" placeholder="researcher@secure.com" />
               </div>
             </div>
 
             <div class="grid md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-lg text-white font-medium mb-2">Got Slack? (Optional)</label>
-                <input 
-                  v-model="form.slackId" 
-                  type="text"
-                  class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none"
-                  placeholder="@username or User ID"
-                >
+                <input v-model="form.slackId" type="text" class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none" placeholder="@username or User ID" />
                 <p class="text-sm text-secondary mt-1">Slack is our preferred channel for communication, and commonly leads to faster responses.</p>
               </div>
               <div>
                 <label class="block text-lg text-white font-medium mb-2">Where are you located? *</label>
-                <select 
-                  v-model="form.region" 
-                  required
-                  class="w-full p-3 rounded-lg h-[54px] bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none"
-                >
+                <select v-model="form.region" required class="w-full p-3 rounded-lg h-[54px] bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none">
                   <option value="">Select your region</option>
                   <option value="us">United States</option>
                   <option value="canada">Canada</option>
@@ -135,7 +105,7 @@
                   <option value="asia">Asia Pacific</option>
                   <option value="other">Other</option>
                 </select>
-                <p class="text-sm text-secondary mt-1">This is to help with payouts! </p>
+                <p class="text-sm text-secondary mt-1">This is to help with payouts!</p>
               </div>
             </div>
           </div>
@@ -149,55 +119,25 @@
           </div>
 
           <div class="grid md:grid-cols-2 gap-4">
-            <div 
-              v-for="program in programs" 
-              :key="program.id"
-              class="p-4 rounded-lg border transition-colors cursor-pointer"
-              :class="form.affected.includes(program.id) 
-                ? 'bg-primary/20 border-primary text-white' 
-                : 'bg-darkless border-darkless text-secondary hover:border-white/40'"
-              @click="toggleProgram(program.id)"
-            >
+            <div v-for="program in programs" :key="program.id" class="p-4 rounded-lg border transition-colors cursor-pointer" :class="form.affected.includes(program.id) ? 'bg-primary/20 border-primary text-white' : 'bg-darker border-darkless text-secondary hover:border-white/40'" @click="toggleProgram(program.id)">
               <div class="flex items-start space-x-3">
-                <input 
-                  type="checkbox" 
-                  :checked="form.affected.includes(program.id)"
-                  class="mt-1 w-4 h-4 text-primary bg-darker border-darkless rounded focus:ring-primary"
-                  @change="toggleProgram(program.id)"
-                >
+                <input type="checkbox" :checked="form.affected.includes(program.id)" class="mt-1 w-4 h-4 text-primary bg-darker border-darkless rounded focus:ring-primary" @change="toggleProgram(program.id)" />
                 <div>
                   <h4 class="font-semibold">{{ program.name }}</h4>
                   <p class="text-sm opacity-80">{{ program.description }}</p>
-                  <p class="text-xs opacity-60 mt-1">{{ program.domains.join(', ') }}</p>
+                  <p class="text-xs opacity-60 mt-1">{{ program.domains.join(", ") }}</p>
                 </div>
               </div>
             </div>
 
-            <!-- Other option -->
-            <div 
-              class="p-4 rounded-lg border transition-colors cursor-pointer"
-              :class="form.affected.includes('other') 
-                ? 'bg-primary/20 border-primary text-white' 
-                : 'bg-darkless border-darkless text-secondary hover:border-white/40'"
-              @click="toggleProgram('other')"
-            >
+            <div class="p-4 rounded-lg border transition-colors cursor-pointer" :class="form.affected.includes('other') ? 'bg-primary/20 border-primary text-white' : 'bg-darker border-darkless text-secondary hover:border-white/40'" @click="toggleProgram('other')">
               <div class="flex items-start space-x-3">
-                <input 
-                  type="checkbox" 
-                  :checked="form.affected.includes('other')"
-                  class="mt-1 w-4 h-4 text-primary bg-darker border-darkless rounded focus:ring-primary"
-                  @change="toggleProgram('other')"
-                >
+                <input type="checkbox" :checked="form.affected.includes('other')" class="mt-1 w-4 h-4 text-primary bg-darker border-darkless rounded focus:ring-primary" @change="toggleProgram('other')" />
                 <div class="w-full">
                   <h4 class="font-semibold">Something else...</h4>
                   <p class="text-sm opacity-80 mb-2">Something not listed above (please specify)</p>
                   <div v-if="form.affected.includes('other')" class="mt-3" @click="$event.stopPropagation()">
-                    <input 
-                      v-model="form.otherProgram" 
-                      type="text" 
-                      placeholder="Specify the program, domain, or service..."
-                      class="w-full p-2 rounded bg-darker border border-darkless text-white text-sm focus:border-primary focus:outline-none"
-                    >
+                    <input v-model="form.otherProgram" type="text" placeholder="Specify the program, domain, or service..." class="w-full p-2 rounded bg-darker border border-darkless text-white text-sm focus:border-primary focus:outline-none" />
                   </div>
                 </div>
               </div>
@@ -205,41 +145,6 @@
           </div>
         </div>
 
-        <!-- Vulnerability Type -->
-        <div class="bg-dark p-8 rounded-2xl">
-          <div class="mb-6">
-            <h3 class="text-3xl font-bold text-white mb-2">How did we mess up?</h3>
-            <p class="text-lg text-secondary">Choose the category that best describes your exploit</p>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-4">
-            <div 
-              v-for="vulnType in vulnerabilityTypes" 
-              :key="vulnType.id"
-              class="p-4 rounded-lg border transition-colors cursor-pointer"
-              :class="form.vulnType === vulnType.id 
-                ? 'bg-primary/20 border-primary text-white' 
-                : 'bg-darkless border-darkless text-secondary hover:border-white/40'"
-              @click="form.vulnType = vulnType.id"
-            >
-              <div class="flex items-start space-x-3">
-                <input 
-                  v-model="form.vulnType"
-                  type="radio" 
-                  :value="vulnType.id"
-                  class="mt-1 w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary"
-                >
-                <div>
-                  <h4 class="font-semibold">{{ vulnType.name }}</h4>
-                  <p class="text-sm opacity-80">{{ vulnType.description }}</p>
-                  <p class="text-sm text-green mt-1">{{ vulnType.payout }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Simplified Severity Assessment -->
         <div class="bg-dark p-8 rounded-2xl">
           <div class="mb-6">
             <h3 class="text-3xl font-bold text-white mb-2">How bad's the damage?</h3>
@@ -247,49 +152,40 @@
           </div>
 
           <div class="space-y-6">
-            <div class="bg-white/5 p-4 rounded-lg">
+            <div class="bg-darker p-4 rounded-lg">
               <label class="block text-lg text-white font-medium mb-3">Can someone exploit this vulnerability from the internet?</label>
               <div class="grid grid-cols-2 gap-3">
-                <label class="flex items-center space-x-2 cursor-pointer p-3 rounded border transition-colors"
-                  :class="form.severity.remote === 'yes' ? 'bg-primary/20 border-primary text-white' : 'border-darkless text-secondary hover:border-white/40'">
-                  <input v-model="form.severity.remote" type="radio" value="yes" class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary">
+                <label class="flex items-center space-x-2 cursor-pointer p-3 rounded border transition-colors" :class="form.severity.remote === 'yes' ? 'bg-primary/20 border-primary text-white' : 'border-transparent text-secondary hover:border-white/40'">
+                  <input v-model="form.severity.remote" type="radio" value="yes" class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary" />
                   <span>Yes, from anywhere on the internet</span>
                 </label>
-                <label class="flex items-center space-x-2 cursor-pointer p-3 rounded border transition-colors"
-                  :class="form.severity.remote === 'no' ? 'bg-primary/20 border-primary text-white' : 'border-darkless text-secondary hover:border-white/40'">
-                  <input v-model="form.severity.remote" type="radio" value="no" class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary">
+                <label class="flex items-center space-x-2 cursor-pointer p-3 rounded border transition-colors" :class="form.severity.remote === 'no' ? 'bg-primary/20 border-primary text-white' : 'border-transparent text-secondary hover:border-white/40'">
+                  <input v-model="form.severity.remote" type="radio" value="no" class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary" />
                   <span>No, they need special access</span>
                 </label>
               </div>
             </div>
 
-            <!-- What can an attacker do? -->
-            <div class="bg-white/5 p-4 rounded-lg">
+            <div class="bg-darker p-4 rounded-lg">
               <label class="block text-lg text-white font-medium mb-3">What's the worst thing an attacker could do?</label>
               <div class="grid grid-cols-1 gap-3">
-                <label v-for="impact in impactOptions" :key="impact.value"
-                  class="flex items-center space-x-2 cursor-pointer p-3 rounded border transition-colors"
-                  :class="form.severity.impact === impact.value ? 'bg-primary/20 border-primary text-white' : 'border-darkless text-secondary hover:border-white/40'">
-                  <input v-model="form.severity.impact" type="radio" :value="impact.value" class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary">
+                <label v-for="impact in impactOptions" :key="impact.value" class="flex items-center space-x-2 cursor-pointer p-3 rounded border transition-colors" :class="form.severity.impact === impact.value ? 'bg-primary/20 border-primary text-white' : 'border-transparent text-secondary hover:border-white/40'">
+                  <input v-model="form.severity.impact" type="radio" :value="impact.value" class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary" />
                   <span>{{ impact.label }}</span>
                 </label>
               </div>
             </div>
 
-            <!-- How easy is it to exploit? -->
-            <div class="bg-white/5 p-4 rounded-lg">
+            <div class="bg-darker p-4 rounded-lg">
               <label class="block text-lg text-white font-medium mb-3">How difficult is this to exploit?</label>
               <div class="grid grid-cols-1 gap-3">
-                <label v-for="complexity in complexityOptions" :key="complexity.value"
-                  class="flex items-center space-x-2 cursor-pointer p-3 rounded border transition-colors"
-                  :class="form.severity.complexity === complexity.value ? 'bg-primary/20 border-primary text-white' : 'border-darkless text-secondary hover:border-white/40'">
-                  <input v-model="form.severity.complexity" type="radio" :value="complexity.value" class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary">
+                <label v-for="complexity in complexityOptions" :key="complexity.value" class="flex items-center space-x-2 cursor-pointer p-3 rounded border transition-colors" :class="form.severity.complexity === complexity.value ? 'bg-primary/20 border-primary text-white' : 'border-transparent text-secondary hover:border-white/40'">
+                  <input v-model="form.severity.complexity" type="radio" :value="complexity.value" class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary" />
                   <span>{{ complexity.label }}</span>
                 </label>
               </div>
             </div>
 
-            <!-- Calculated severity display -->
             <div v-if="calculatedSeverity" class="bg-green/10 border border-green/30 p-4 rounded-lg">
               <div class="flex items-center justify-between">
                 <span class="text-white font-medium">Estimated Severity:</span>
@@ -303,25 +199,19 @@
         <div class="bg-dark p-8 rounded-2xl">
           <div class="mb-6">
             <h3 class="text-3xl font-bold text-white mb-2">What's the deets?</h3>
-            <p class="text-lg text-secondary">Give us the lowdown on the vulnerability.</p>
+            <p class="text-lg text-secondary">Give us the lowdown on the vulnerability. Be as detailed as possible.</p>
           </div>
 
           <div class="space-y-6">
             <div>
               <label class="block text-lg text-white font-medium mb-2">Report Title *</label>
-              <input 
-                v-model="form.title" 
-                type="text" 
-                required
-                class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none"
-                placeholder="A short, descriptive title of the exploit"
-              >
+              <input v-model="form.title" type="text" required class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none" placeholder="A short, descriptive title of the exploit" />
             </div>
 
             <div>
               <label class="block text-lg text-white font-medium mb-2">Detailed Description *</label>
-              <textarea 
-                v-model="form.description" 
+              <textarea
+                v-model="form.description"
                 required
                 rows="15"
                 class="w-full p-3 rounded-lg bg-darker border border-darkless text-white focus:border-primary focus:outline-none font-mono text-sm"
@@ -343,39 +233,21 @@
           </div>
 
           <div class="flex justify-between items-center">
-            <nuxt-link 
-              to="/" 
-              class="px-6 py-3 bg-white/10 text-white font-medium rounded-xl hover:bg-white/20 transition-colors"
-            >
-              Cancel
-            </nuxt-link>
-            
-            <button 
-              type="submit" 
-              :disabled="!canSubmit || isSubmitting"
-              class="px-8 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {{ isSubmitting ? 'Submitting...' : 'Submit Report' }}
+            <nuxt-link to="/" class="px-6 py-3 bg-white/10 text-white font-medium rounded-xl hover:bg-white/20 transition-colors"> Cancel </nuxt-link>
+
+            <button type="submit" :disabled="!canSubmit || isSubmitting" class="px-8 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+              {{ isSubmitting ? "Submitting..." : "Submit Report" }}
             </button>
           </div>
         </div>
 
-        <div 
-          v-if="showTurnstile" 
-          class="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style="backdrop-filter: blur(8px); background: rgba(0, 0, 0, 0.7);"
-        >
+        <div v-if="showTurnstile" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="backdrop-filter: blur(8px); background: rgba(0, 0, 0, 0.7)">
           <div class="bg-dark rounded-2xl p-8 max-w-md w-full relative">
             <div v-if="!turnstileToken && !isSubmitting" class="text-center">
               <h3 class="text-2xl font-bold text-white mb-4">Security Check</h3>
               <p class="text-secondary mb-6">Please complete this verification before we submit your report.</p>
               <div id="turnstile-container" class="flex justify-center mb-4" />
-              <button 
-                class="px-4 py-2 text-secondary hover:text-white transition-colors cursor-pointer"
-                @click="showTurnstile = false"
-              >
-                Cancel
-              </button>
+              <button class="px-4 py-2 text-secondary hover:text-white transition-colors cursor-pointer" @click="showTurnstile = false">Cancel</button>
             </div>
 
             <div v-else-if="turnstileToken && isSubmitting" class="text-center">
@@ -403,234 +275,208 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, computed } from 'vue'
-import programs from '@/assets/data/programs.json'
+import { ref, reactive, onMounted, computed } from "vue";
+import programs from "@/assets/data/programs.json";
 
 useHead({
-  title: 'Submit Security Report - Hack Club Security Program',
+  title: "Submit Security Report - Hack Club Security Program",
   meta: [
     {
-      name: 'description',
-      content: 'Submit a security vulnerability report to the Hack Club Security Bounty Program'
-    }
-  ]
-})
+      name: "description",
+      content: "Submit a security vulnerability report to the Hack Club Security Bounty Program",
+    },
+  ],
+});
 
-const config = useRuntimeConfig()
-const turnstilePublicKey = config.public.tpublic
+const config = useRuntimeConfig();
+const turnstilePublicKey = config.public.tpublic;
 
-const isSubmitting = ref(false)
-const statusMessage = ref('')
-const isSuccess = ref(false)
-const reportId = ref('')
-const turnstileToken = ref('')
-const showTurnstile = ref(false)
+const isSubmitting = ref(false);
+const statusMessage = ref("");
+const isSuccess = ref(false);
+const reportId = ref("");
+const turnstileToken = ref("");
+const showTurnstile = ref(false);
 
 const form = reactive({
   termsAccepted: false,
-  name: '',
-  email: '',
-  slackId: '',
-  region: '',
+  name: "",
+  email: "",
+  slackId: "",
+  region: "",
   affected: [],
-  otherProgram: '',
-  vulnType: '',
+  otherProgram: "",
   severity: {
-    remote: '',
-    impact: '',
-    complexity: ''
+    remote: "",
+    impact: "",
+    complexity: "",
   },
-  title: '',
-  description: ''
-})
-
-const vulnerabilityTypes = [
-  { id: 'rce-root', name: 'Remote Code Execution (Root)', description: 'Root access to servers', payout: '$500' },
-  { id: 'rce-nonroot', name: 'Remote Code Execution (Non-root)', description: 'Non-root access to servers', payout: '$250' },
-  { id: 'auth-bypass', name: 'Authentication Bypass', description: 'OAuth flaws, session management vulnerabilities', payout: '$100' },
-  { id: 'sqli', name: 'SQL Injection', description: 'Database exploitation vulnerabilities', payout: '$100' },
-  { id: 'pii-critical', name: 'PII Leak (Critical)', description: 'Government-issued ID numbers, financial data', payout: '$75' },
-  { id: 'xss-stored', name: 'Cross-Site Scripting (Stored)', description: 'Persistent XSS vulnerabilities', payout: '$50' },
-  { id: 'csrf', name: 'Cross-Site Request Forgery', description: 'CSRF attacks on sensitive actions', payout: '$25' },
-  { id: 'pii-minor', name: 'PII Leak (Minor)', description: 'Email addresses, usernames, non-sensitive data', payout: '$25' },
-  { id: 'xss-reflected', name: 'Cross-Site Scripting (Reflected)', description: 'Non-persistent XSS vulnerabilities', payout: '$15' },
-  { id: 'other', name: 'Other Security Issue', description: 'Other security vulnerabilities not listed above', payout: 'Variable' }
-]
+  title: "",
+  description: "",
+});
 
 const impactOptions = [
-  { value: 'high', label: 'Take complete control of the system or access all user data' },
-  { value: 'medium', label: 'Access some user data or perform unauthorized actions' },
-  { value: 'low', label: 'Gather information or cause minor disruption' }
-]
+  { value: "high", label: "Take complete control of the system or access all user data" },
+  { value: "medium", label: "Access some user data or perform unauthorized actions" },
+  { value: "low", label: "Gather information or cause minor disruption" },
+];
 
 const complexityOptions = [
-  { value: 'low', label: 'Very easy - anyone can do it with basic tools' },
-  { value: 'medium', label: 'Moderate - requires some technical knowledge' },
-  { value: 'high', label: 'Difficult - requires advanced skills and specific conditions' }
-]
+  { value: "low", label: "Very easy - anyone can do it with basic tools" },
+  { value: "medium", label: "Moderate - requires some technical knowledge" },
+  { value: "high", label: "Difficult - requires advanced skills and specific conditions" },
+];
 
 const calculatedSeverity = computed(() => {
   if (!form.severity.remote || !form.severity.impact || !form.severity.complexity) {
-    return null
+    return null;
   }
 
-  let score = 0
-  let payout = 0
+  let score = 0;
+  let payout = 0;
 
   // Remote access factor
-  if (form.severity.remote === 'yes') score += 3
-  else score += 1
+  if (form.severity.remote === "yes") score += 3;
+  else score += 1;
 
   // Impact factor
-  if (form.severity.impact === 'high') {
-    score += 4
-    payout += 300
-  } else if (form.severity.impact === 'medium') {
-    score += 2
-    payout += 100
+  if (form.severity.impact === "high") {
+    score += 4;
+    payout += 300;
+  } else if (form.severity.impact === "medium") {
+    score += 2;
+    payout += 100;
   } else {
-    score += 1
-    payout += 25
+    score += 1;
+    payout += 25;
   }
 
   // Complexity factor (inverse - easier = higher score)
-  if (form.severity.complexity === 'low') score += 2
-  else if (form.severity.complexity === 'medium') score += 1
+  if (form.severity.complexity === "low") score += 2;
+  else if (form.severity.complexity === "medium") score += 1;
 
   // Determine level
-  let level = 'Low'
+  let level = "Low";
   if (score >= 7) {
-    level = 'Critical'
-    payout = Math.max(payout, 250)
+    level = "Critical";
+    payout = Math.max(payout, 250);
   } else if (score >= 5) {
-    level = 'High'
-    payout = Math.max(payout, 100)
+    level = "High";
+    payout = Math.max(payout, 100);
   } else if (score >= 3) {
-    level = 'Medium'
-    payout = Math.max(payout, 50)
+    level = "Medium";
+    payout = Math.max(payout, 50);
   } else {
-    payout = Math.max(payout, 15)
+    payout = Math.max(payout, 15);
   }
 
-  return { level, payout }
-})
+  return { level, payout };
+});
 
 const canSubmit = computed(() => {
-  return form.termsAccepted &&
-         form.name &&
-         form.email &&
-         form.region &&
-         form.affected.length > 0 &&
-         form.vulnType &&
-         form.severity.remote &&
-         form.severity.impact &&
-         form.severity.complexity &&
-         form.title &&
-         form.description
-})
+  return form.termsAccepted && form.name && form.email && form.region && form.affected.length > 0 && form.severity.remote && form.severity.impact && form.severity.complexity && form.title && form.description;
+});
 
 function toggleProgram(programId) {
-  const index = form.affected.indexOf(programId)
+  const index = form.affected.indexOf(programId);
   if (index > -1) {
-    form.affected.splice(index, 1)
+    form.affected.splice(index, 1);
   } else {
-    form.affected.push(programId)
+    form.affected.push(programId);
   }
 }
 
 function getRegionDisplay(region) {
   const regions = {
-    us: 'United States',
-    canada: 'Canada',
-    eu: 'European Union',
-    uk: 'United Kingdom',
-    australia: 'Australia',
-    asia: 'Asia Pacific',
-    other: 'Other'
-  }
-  return regions[region] || 'Not selected'
+    us: "United States",
+    canada: "Canada",
+    eu: "European Union",
+    uk: "United Kingdom",
+    australia: "Australia",
+    asia: "Asia Pacific",
+    other: "Other",
+  };
+  return regions[region] || "Not selected";
 }
 
 function getAffectedDisplay() {
-  if (form.affected.length === 0) return 'None selected'
-  
-  const programNames = form.affected.map(id => {
-    if (id === 'other') return form.otherProgram || 'Other'
-    const program = programs.find(p => p.id === id)
-    return program ? program.name : id
-  })
-  
-  return programNames.join(', ')
+  if (form.affected.length === 0) return "None selected";
+
+  const programNames = form.affected.map((id) => {
+    if (id === "other") return form.otherProgram || "Other";
+    const program = programs.find((p) => p.id === id);
+    return program ? program.name : id;
+  });
+
+  return programNames.join(", ");
 }
 
 function getVulnTypeDisplay() {
-  if (!form.vulnType) return 'Not selected'
-  const vulnType = vulnerabilityTypes.find(v => v.id === form.vulnType)
-  return vulnType ? vulnType.name : form.vulnType
+  return "";
 }
 
 async function handleSubmit() {
-  if (!canSubmit.value) return
-  
-  showTurnstile.value = true
-  loadTurnstile()
+  if (!canSubmit.value) return;
+
+  showTurnstile.value = true;
+  loadTurnstile();
 }
 
 function loadTurnstile() {
-  if (window.turnstile) {
-    window.turnstile.render('#turnstile-container', {
+  const container = document.getElementById("turnstile-container");
+  if (window.turnstile && container) {
+    window.turnstile.render(container, {
       sitekey: turnstilePublicKey,
       callback: (token) => {
-        turnstileToken.value = token
-        submitReport()
-      }
-    })
+        turnstileToken.value = token;
+        submitReport();
+      },
+    });
   } else {
-    setTimeout(loadTurnstile, 100)
+    setTimeout(loadTurnstile, 100);
   }
 }
 
 async function submitReport() {
-  isSubmitting.value = true
-  
+  isSubmitting.value = true;
   try {
-    const response = await $fetch('/api/submit', {
-      method: 'POST',
+    const response = await $fetch("/api/tmbx", {
+      method: "POST",
       body: {
         ...form,
         turnstileToken: turnstileToken.value,
-        calculatedSeverity: calculatedSeverity.value
-      }
-    })
+        calculatedSeverity: calculatedSeverity.value,
+      },
+    });
 
     if (response.success) {
-      statusMessage.value = response.message
-      isSuccess.value = true
-      reportId.value = response.reportId
-      
+      statusMessage.value = response.message;
+      isSuccess.value = true;
+      reportId.value = response.reportId;
+
       // Scroll to top to show success message
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      throw new Error(response.message || 'Submission failed')
+      throw new Error(response.message || "Submission failed");
     }
   } catch (error) {
-    statusMessage.value = error.message || 'Failed to submit report. Please try again.'
-    isSuccess.value = false
+    statusMessage.value = error.message || "Failed to submit report. Please try again.";
+    isSuccess.value = false;
   } finally {
-    isSubmitting.value = false
-    showTurnstile.value = false
-    turnstileToken.value = ''
+    isSubmitting.value = false;
+    showTurnstile.value = false;
+    turnstileToken.value = "";
   }
 }
 
 onMounted(() => {
   // Load Turnstile script
-  const script = document.createElement('script')
-  script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
-  script.async = true
-  document.head.appendChild(script)
-  window.addEventListener('beforeunload', function() {
-    this.event.returnValue = 'Are you sure you want to leave? Your progress will not be saved.'
-  })
-})
+  const script = document.createElement("script");
+  script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+  script.async = true;
+  document.head.appendChild(script);
+  window.addEventListener("beforeunload", function () {
+    this.event.returnValue = "Are you sure you want to leave? Your progress will not be saved.";
+  });
+});
 </script>

@@ -10,8 +10,8 @@ export default defineNuxtConfig({
     webhook: process.env.SLACK_WEBHOOK_URL,
     ekey: process.env.RESEND_API_KEY,
     public: {
-      tpublic: process.env.TURNSTILE_SITE_KEY
-    }
+      tpublic: process.env.TURNSTILE_SITE_KEY,
+    },
   },
   app: {
     head: {
@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         { property: "og:site_name", content: "Hack Club Security Program" },
         { property: "og:title", content: "Hack Club Security Program" },
         { property: "og:description", content: "Help keep Hack Club secure. Report vulnerabilities and earn bounties through our security program." },
-        { property: "og:url", content: "https://security.hackclub.com" }
+        { property: "og:url", content: "https://security.hackclub.com" },
       ],
       htmlAttrs: {
         lang: "en",
@@ -35,9 +35,7 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "manifest", href: "/site.webmanifest" },
       ],
-      script: [
-        { src: "https://challenges.cloudflare.com/turnstile/v0/api.js", async: true, defer: true }
-      ],
+      script: [{ src: "https://challenges.cloudflare.com/turnstile/v0/api.js", async: true, defer: true }],
     },
   },
   modules: ["@nuxt/eslint", "@nuxt/fonts", "@nuxt/image", "@nuxt/icon"],
