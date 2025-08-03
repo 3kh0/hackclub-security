@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="report in reports" :key="report.id" class="border-b border-white/10 hover:bg-white/5 transition-colors cursor-pointer" @click="goToReport(report.id)">
+            <tr v-for="report in reports" :key="report.id" class="border-b border-white/10 hover:bg-white/5 transition-colors cursor-pointer" @click="go(report.id)">
               <td class="px-4 py-2 text-xs text-secondary font-mono">{{ report.id }}</td>
               <td class="px-4 py-2 text-xs text-secondary">{{ report.timestamp }}</td>
               <td class="px-4 py-2 text-white font-semibold">{{ report.name }}</td>
@@ -76,7 +76,7 @@ function severityClass(sev) {
   return "text-white";
 }
 
-function goToReport(id) {
+function go(id) {
   router.push(`/backend/report/${id}`)
 }
 </script>
