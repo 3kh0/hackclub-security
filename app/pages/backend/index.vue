@@ -1,6 +1,10 @@
 <template>
-  <div class="min-h-screen bg-darker p-4">
-    <div class="max-w-6xl mx-auto">
+  <div class="p-4">
+    <div class="max-w-6xl mx-auto relative">
+      <div class="absolute top-0 right-0 mt-4 mr-4 flex items-center space-x-4">
+        <span v-if="user" class="text-secondary bg-darkless px-3 py-1 rounded font-mono">{{ user.email }}</span>
+        <button @click="logout" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition">Logout</button>
+      </div>
       <h1 class="text-4xl font-bold text-white mb-8 text-center">Security Reports Dashboard</h1>
       <div class="bg-dark rounded-2xl shadow-lg p-6">
         <div v-if="loading" class="flex justify-center items-center py-12">
@@ -41,9 +45,19 @@
 </template>
 
 <script setup>
+const { user, clear: clearSession } = useUserSession()
 const reports = ref([]);
 const loading = ref(true);
 const router = useRouter();
+
+definePageMeta({
+  middleware: ['auth'],
+})
+
+async function logout() {
+  await clearSession()
+  await navigateTo('/')
+}
 
 onMounted(async () => {
   const res = await fetch("/api/reports");
@@ -51,6 +65,7 @@ onMounted(async () => {
     reports.value = await res.json();
   }
   loading.value = false;
+  console.log(user.value.email)
 });
 
 function severityClass(sev) {

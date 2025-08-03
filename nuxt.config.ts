@@ -38,7 +38,7 @@ export default defineNuxtConfig({
       script: [{ src: "https://challenges.cloudflare.com/turnstile/v0/api.js", async: true, defer: true }],
     },
   },
-  modules: ["@nuxt/eslint", "@nuxt/fonts", "@nuxt/image", "@nuxt/icon"],
+  modules: ["@nuxt/eslint", "@nuxt/fonts", "@nuxt/image", "@nuxt/icon", "nuxt-auth-utils"],
   vite: {
     plugins: [tailwindcss()],
   },
