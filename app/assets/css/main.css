@@ -59,6 +59,7 @@
 html,
 body {
   background-color: var(--color-darker);
+  color: var(--color-white);
   font-family: "Phantom Sans", sans-serif;
 }
 
