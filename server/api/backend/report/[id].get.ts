@@ -7,5 +7,12 @@ export default defineEventHandler(async (event) => {
   if (!rows.length) {
     throw createError({ statusCode: 404 })
   }
-  return rows[0]
+  const report = rows[0]
+  if (
+    user.role !== 'admin' &&
+    !(report.allowed_emails?.includes(user.email) || report.email === user.email)
+  ) {
+    throw createError({ statusCode: 403, statusMessage: 'Forbidden'})
+  }
+  return report
 })

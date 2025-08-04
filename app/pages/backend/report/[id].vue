@@ -46,6 +46,20 @@
             <span class="text-secondary">Description:</span>
             <pre class="bg-darker p-4 rounded text-white whitespace-pre-wrap">{{ report.description }}</pre>
           </div>
+          <div class="mb-4">
+            <span class="text-secondary">Allowed Emails:</span>
+            <ul class="ml-2">
+              <li v-for="email in report.allowed_emails" :key="email" class="text-white flex items-center space-x-2">
+                <span>{{ email }}</span>
+                <button v-if="isAdmin && email !== report.email" @click="removeEmail(email)" class="text-red-500 hover:underline">Remove</button>
+              </li>
+            </ul>
+            <div v-if="isAdmin" class="mt-2 flex items-center space-x-2">
+              <input v-model="newEmail" type="email" placeholder="Add email" class="p-2 rounded bg-darker border border-darkless text-white text-sm focus:border-primary focus:outline-none" />
+              <button @click="addEmail" class="bg-primary text-white px-3 py-1 rounded hover:bg-primary/80">Add</button>
+            </div>
+            <div v-if="emailStatus" class="mt-2 text-sm text-green">{{ emailStatus }}</div>
+          </div>
         </div>
         <div v-else class="text-secondary">Loading...</div>
       </template>
@@ -58,6 +72,9 @@ const route = useRoute()
 const report = ref(null)
 const status = ref('open')
 const error = ref(false)
+const isAdmin = true // TODO: Replace with real admin check
+const newEmail = ref("")
+const emailStatus = ref("")
 
 async function fetchReport() {
   const res = await fetch(`/api/backend/report/${route.params.id}`)
@@ -78,12 +95,44 @@ async function fetchReport() {
 }
 
 async function updateStatus() {
-  await fetch(`/api/report/${route.params.id}`, {
+  await fetch(`/api/backend/report/${route.params.id}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ status: status.value })
   })
   await fetchReport()
+}
+
+async function addEmail() {
+  if (!newEmail.value) return
+  const updated = [...report.value.allowed_emails, newEmail.value]
+  const res = await fetch(`/api/backend/report/${route.params.id}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ allowed_emails: updated })
+  })
+  if (res.ok) {
+    emailStatus.value = `Added ${newEmail.value}`
+    await fetchReport()
+  } else {
+    emailStatus.value = `Failed to add ${newEmail.value}`
+  }
+  newEmail.value = ""
+}
+
+async function removeEmail(email) {
+  const updated = report.value.allowed_emails.filter(e => e !== email)
+  const res = await fetch(`/api/backend/report/${route.params.id}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ allowed_emails: updated })
+  })
+  if (res.ok) {
+    emailStatus.value = `Removed ${email}`
+    await fetchReport()
+  } else {
+    emailStatus.value = `Failed to remove ${email}`
+  }
 }
 
 onMounted(fetchReport)

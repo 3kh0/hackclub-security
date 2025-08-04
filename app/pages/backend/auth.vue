@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 const { loggedIn, user, fetch: refreshSession } = useUserSession()
 const email = ref('')
 const code = ref('')
 const step = ref(1)
 const loading = ref(false)
+const route = useRoute()
+const router = useRouter()
 
 async function r() {
   loading.value = true
   await $fetch('/api/auth/e', {
     method: 'POST',
-    body: { email: email.value }
+    body: { email: email.value, r: route.query.r || null }
   })
   loading.value = false
   step.value = 2
@@ -24,7 +25,8 @@ async function verifyCode() {
   })
   .then(async () => {
     await refreshSession()
-    await navigateTo('/backend/')
+    const redirect = route.query.r || '/backend/'
+    await router.push(redirect)
   })
   .catch(() => alert('Rejected'))
   loading.value = false

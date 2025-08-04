@@ -23,17 +23,18 @@ export default defineEventHandler(async (event) => {
 
   // Ensure table exists
   await client.query(`CREATE TABLE IF NOT EXISTS reports (
-    id VARCHAR(32) PRIMARY KEY,
+    id VARCHAR PRIMARY KEY,
     timestamp TIMESTAMP,
-    name VARCHAR(100),
-    email VARCHAR(100),
-    region VARCHAR(32),
+    name VARCHAR,
+    email VARCHAR,
+    region VARCHAR,
     affected_programs TEXT[],
-    title VARCHAR(200),
+    title VARCHAR,
     description TEXT,
     cvss_score FLOAT,
-    severity VARCHAR(16),
-    status VARCHAR(32) DEFAULT 'open'
+    severity VARCHAR,
+    status VARCHAR DEFAULT 'open',
+    allowed_emails TEXT[]
   )`);
 
   // Build submission
@@ -48,15 +49,16 @@ export default defineEventHandler(async (event) => {
     description: body.description,
     cvssScore: body.cvssScore,
     severity: body.severity,
-    status: 'open'
+    status: 'open',
+    allowedEmails: [body.email] // reporter always included
   };
 
   let dbSuccess = false;
   try {
     await client.query(
-      `INSERT INTO reports (id, timestamp, name, email, region, affected_programs, title, description, cvss_score, severity, status)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
-      [submission.id, submission.timestamp, submission.name, submission.email, submission.region, submission.affectedPrograms, submission.title, submission.description, submission.cvssScore, submission.severity, submission.status],
+      `INSERT INTO reports (id, timestamp, name, email, region, affected_programs, title, description, cvss_score, severity, status, allowed_emails)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
+      [submission.id, submission.timestamp, submission.name, submission.email, submission.region, submission.affectedPrograms, submission.title, submission.description, submission.cvssScore, submission.severity, submission.status, submission.allowedEmails],
     );
     dbSuccess = true;
     await client.end();
@@ -97,3 +99,5 @@ async function verifyTurnstile(token: string, key: string): Promise<{ success: b
     return { success: false };
   }
 }
+
+// No admin-specific logic needed for report submission, as anyone can submit.

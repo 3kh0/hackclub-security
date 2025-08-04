@@ -22,7 +22,10 @@ export default defineEventHandler(async (event) => {
     if (otp.attempts > 3) {
       return {}
     }
-    await setUserSession(event, { user: { email } })
+    // Fetch user role
+    const userRes = await pg.query('SELECT role FROM users WHERE email = $1', [email])
+    const role = userRes.rows[0]?.role || 'user'
+    await setUserSession(event, { user: { email, role } })
     await pg.query('DELETE FROM otp WHERE email = $1', [email])
     return {}
   } catch {

@@ -47,3 +47,32 @@ ${data.description}`;
     return false;
   }
 }
+
+export async function sendReportInvite(
+  email: string,
+  reportId: string,
+  baseUrl: string,
+  apiKey: string,
+): Promise<boolean> {
+  try {
+    const r = new Resend(apiKey);
+    const link = `${baseUrl}/backend/auth?r=/backend/report/${reportId}`;
+    await r.emails.send({
+      from: "Hack Club Security Program <gatekeeper@outbound.3kh0.net>",
+      to: [email],
+      subject: `You've been invited to triage report ${reportId}`,
+      text: `Hello,
+
+You have been invited to help triage a security report as part of the Hack Club Security Program.
+
+Sign in to view the report: ${link}`,
+      html: `<p>Hello,</p>
+<p>You have been invited to help triage a security report as part of the Hack Club Security Program.</p>
+<p><a href='${link}'>Sign in to view the report</a></p>`,
+    });
+    return true;
+  } catch (error) {
+    console.error("shit ", error);
+    return false;
+  }
+}
