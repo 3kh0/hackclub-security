@@ -68,9 +68,7 @@ export default defineEventHandler(async (event) => {
   }
 
   if (dbSuccess) {
-    const emailSubject = "Report Submission Confirmation";
-    const emailText = `Thank you for submitting your report. Your report ID is ${submission.id}. We will send any updates to your email address.`;
-    await sendEmail(submission.email, emailSubject, emailText);
+    await sendEmail(submission.email, submission.id);
   }
 
   return {

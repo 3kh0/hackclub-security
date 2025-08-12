@@ -1,27 +1,20 @@
-import nodemailer from 'nodemailer';
+import { Resend } from "resend";
 
-export async function sendEmail(to: string, subject: string, text: string) {
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+export async function sendEmail(to: string, reportId: string) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
-  const mailOptions = {
-    from: process.env.SMTP_FROM,
-    to,
-    subject,
-    text,
-  };
+  const subject = "We got your report!";
+  const text = `Thank you for submitting your report to the Hack Club Security program. Your report ID is ${reportId}. We will send any updates to your email address.`;
 
   try {
-    await transporter.sendMail(mailOptions);
+    await resend.emails.send({
+      from: process.env.SMTP_FROM,
+      to: [to],
+      subject,
+      text,
+    });
     console.log(`Email sent to ${to}`);
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error("Error sending email:", error);
   }
 }
