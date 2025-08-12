@@ -1,4 +1,5 @@
 import { Client } from "pg";
+import { sendEmail } from "../utils/email/submit";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
@@ -64,6 +65,12 @@ export default defineEventHandler(async (event) => {
     await client.end();
   } catch (err) {
     console.error("DB insert error:", err);
+  }
+
+  if (dbSuccess) {
+    const emailSubject = "Report Submission Confirmation";
+    const emailText = `Thank you for submitting your report. Your report ID is ${submission.id}. We will send any updates to your email address.`;
+    await sendEmail(submission.email, emailSubject, emailText);
   }
 
   return {
