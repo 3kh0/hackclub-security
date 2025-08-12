@@ -34,7 +34,7 @@ Description:
 ${data.description}`;
 
     await r.emails.send({
-      from: "Hack Club Security Report <tmbx@outbound.3kh0.net>",
+      from: "Hack Club Security Report <submit@outbound.3kh0.net>",
       to: ["hcb-security@hackclub.com"], // testing@3kh0.net
       subject: `HCB Report: ${data.title} [${data.id}]`,
       reply_to: data.email,

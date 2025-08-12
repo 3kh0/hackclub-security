@@ -434,7 +434,7 @@ function loadTurnstile() {
 async function submitReport() {
   isSubmitting.value = true;
   try {
-    const response = await $fetch("/api/tmbx", {
+    const response = await $fetch("/api/submit", {
       method: "POST",
       body: {
         ...form,

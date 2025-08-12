@@ -225,7 +225,7 @@ onMounted(() => {
   const p = document.getElementById("a");
   const pc = document.getElementById("c");
   if (p) {
-    fetch("/api/udx")
+    fetch("/api/payout")
       .then((response) => response.json())
       .then((data) => {
         p.textContent = data.t.toLocaleString();
