@@ -1,5 +1,5 @@
-import { pg } from '~/server/utils/db';
-import { email } from '~/server/utils/email';
+import { pg } from '../../utils/db';
+import { email } from '../../utils/email';
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
@@ -64,7 +64,8 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      id: reportId
+      reportId,
+      message: "Report submitted successfully"
     };
   } catch (error) {
     console.error('Error submitting report:', error);
