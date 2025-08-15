@@ -59,7 +59,10 @@ export default defineEventHandler(async (event) => {
     );
 
     // Send confirmation email to reporter
-    await email(userEmail, `Thank you for submitting your report to the Hack Club Security program. Your report ID is ${reportId}. We will send any updates to your email address, including if we need further information regarding your submission, or when your report has been resolved. Thank you for helping us keep Hack Club secure!`);
+    await email(
+      userEmail,
+      `**Thank you for submitting your report to the Hack Club Security program.**\n\nYour report ID is **${reportId}**.\n\nWe will send any updates to your email address, including if we need further information regarding your submission, or when your report has been resolved.\n\nThank you for helping us keep Hack Club secure!`
+    );
 
     return {
       success: true,
