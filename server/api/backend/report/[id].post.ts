@@ -16,8 +16,8 @@ export default defineEventHandler(async (event) => {
       throw createError({ statusCode: 403, statusMessage: 'Admins only'})
     }
     await pg.query('UPDATE reports SET allowed_emails = $1 WHERE id = $2', [body.allowed_emails, id])
-    const new = body.allowed_emails.filter(e => !currentEmails.includes(e))
-    for (const email of new) {
+    const newEmails = body.allowed_emails.filter(e => !currentEmails.includes(e))
+    for (const email of newEmails) {
       const c = `You've been invited to collaborate on a security report (ID: **${id}**).\n\nClick [here](${process.env.BASE_URL || 'https://security.hackclub.com'}/backend/auth?r=${process.env.BASE_URL || 'https://security.hackclub.com'}/backend/report/${id}) to sign in and view the report.\n\nIf you did not expect this invitation, you can safely ignore this email.`;
       await email(email, c, "You've been invited to collaborate on a security report")
     }

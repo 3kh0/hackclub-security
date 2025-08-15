@@ -251,18 +251,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Status Message -->
-        <div v-if="statusMessage" role="alert" class="mt-6 p-4 rounded-lg" :class="isSuccess ? 'bg-green/20 border border-green/30 text-green' : 'bg-red/20 border border-red/30 text-red'">
-          <div class="flex items-center space-x-2">
-            <span v-if="isSuccess" class="text-2xl">✅</span>
-            <span v-else class="text-2xl">❌</span>
-            <span class="font-medium">{{ statusMessage }}</span>
-          </div>
-          <div v-if="isSuccess && reportId" class="mt-2 text-sm">
-            Report ID: <code class="bg-dark px-2 py-1 rounded text-green">{{ reportId }}</code>
-          </div>
-        </div>
       </form>
     </div>
   </div>
@@ -434,7 +422,7 @@ function loadTurnstile() {
 async function submitReport() {
   isSubmitting.value = true;
   try {
-    const response = await $fetch("/api/submit", {
+  const response = await $fetch("/api/submit", {
       method: "POST",
       body: {
         ...form,
@@ -447,9 +435,10 @@ async function submitReport() {
       statusMessage.value = response.message;
       isSuccess.value = true;
       reportId.value = response.reportId;
-
-      // Scroll to top to show success message
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      navigateTo({
+        path: '/success',
+        query: { c: response.reportId }
+      });
     } else {
       throw new Error(response.message || "Submission failed");
     }

@@ -66,8 +66,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      reportId,
-      message: "Report submitted successfully"
+      reportId
     };
   } catch (error) {
     console.error('Error submitting report:', error);
