@@ -1,11 +1,12 @@
 import { pg } from '../utils/db';
 import { email } from '../utils/email';
+import { turnstile } from '../utils/turnstile';
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const body = await readBody(event);
 
-  const verify = await verifyTurnstile(body.turnstileToken, config.tprivate);
+  const verify = await turnstile(body.turnstileToken, config.tprivate);
   if (!verify.success) {
     throw createError({
       statusCode: 400,
@@ -76,31 +77,3 @@ export default defineEventHandler(async (event) => {
     });
   }
 });
-
-async function verifyTurnstile(token: string, key: string): Promise<{ success: boolean }> {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "User-Agent": "HackClub-Security/1.0",
-      },
-      body: new URLSearchParams({
-        secret: key,
-        response: token,
-      }),
-      signal: controller.signal,
-    });
-    clearTimeout(timeout);
-    if (!response.ok) {
-      return { success: false };
-    }
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error("Turnstile error:", error);
-    return { success: false };
-  }
-}
