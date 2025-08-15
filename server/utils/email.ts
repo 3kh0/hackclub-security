@@ -1,19 +1,20 @@
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const from = "Hack Club Security Program <gatekeeper@outbound.3kh0.net>";
 
 export async function email(to: string, content: string, subject?: string) {
   try {
     await resend.emails.send({
-      from: process.env.SMTP_FROM!,
+      from,
       to: [to],
       subject: subject || "Hack Club Security Program",
       text: content,
     });
-    console.log(`Email sent to ${to}`);
+    console.log(`YO WE JUST SHOT A FUCKING EMAIL TO ${to}`);
     return true;
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("MISSION FAILED SENDING EMAIL", error);
     throw error;
   }
 }
@@ -31,7 +32,7 @@ If you did not expect this invitation, you can safely ignore this email.`;
 
   try {
     await resendClient.emails.send({
-      from: process.env.SMTP_FROM!,
+      from,
       to: [to],
       subject,
       text,
