@@ -4,14 +4,15 @@ import { shot } from '../../utils/opt'
 
 const bodySchema = z.object({
   email: z.string().email(),
-  r: z.string().optional()
+  r: z.string().nullable().optional()
 })
 
 export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, bodySchema.parse)
   const email = body.email
   const secId = body.r ? body.r.trim().split('/report/').pop() : undefined
-  if (secId !== null && secId !== undefined) {
+
+  if (secId) {
     const reportRes = await pg.query('SELECT allowed_emails, email FROM reports WHERE id = $1', [secId])
     if (!reportRes.rows.length) {
       return {}

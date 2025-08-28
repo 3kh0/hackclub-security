@@ -36,7 +36,7 @@
           </div>
           <div class="mb-4">
             <span class="text-secondary">Severity:</span>
-            <span class="text-white ml-2">{{ report.severity }}</span>
+            <span class="text-white ml-2">{{ fsev }}</span>
           </div>
           <div class="mb-4">
             <span class="text-secondary">CVSS Score:</span>
@@ -134,6 +134,12 @@ async function removeEmail(email) {
     emailStatus.value = `Failed to remove ${email}`
   }
 }
+
+const fsev = computed(() => {
+  if (!report.value || !report.value.severity) return 'N/A';
+  const { remote = 'N/A', impact = 'N/A', complexity = 'N/A' } = report.value.severity || {};
+  return `Remote: ${remote}, Impact: ${impact}, Complexity: ${complexity}`;
+});
 
 onMounted(fetchReport)
 </script>
