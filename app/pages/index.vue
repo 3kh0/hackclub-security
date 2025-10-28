@@ -1,209 +1,319 @@
 <template>
-  <div class="min-h-screen bg-darker p-2 md:p-4">
-    <div class="max-w-6xl mx-auto space-y-8">
-      <div class="text-center my-12 relative">
-        <h1 class="text-6xl md:text-7xl font-bold p-4 mb-4 bg-gradient-to-r from-primary to-orange bg-clip-text text-transparent">Hack Club Security Program</h1>
-        <div id="c" class="hidden absolute right-0 bottom-0 font-[Minecraft] -translate-x-1/4 -translate-y-1/2 rotate-[-15deg] text-[#fdfd0e] font-bold text-xl s" style="z-index: 10">
-          <a href="https://hcb.hackclub.com/hack-club-security/transactions" target="_blank" rel="noopener noreferrer" class="hover:text-blue/80 transition-colors">$<span id="a"></span> paid out!</a>
-        </div>
-      </div>
-      <div class="bg-dark p-8 rounded-2xl">
-        <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
-          <img src="@/assets/s.png" alt="meow" class="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain flex-shrink-0" />
-          <div class="max-w-2xl text-secondary text-xl space-y-4 flex flex-col justify-center h-full">
-            <p>
-              Hi! I’m
-              <a href="https://github.com/ading2210" target="_blank" rel="noopener noreferrer" class="text-blue font-semibold hover:text-blue/80 transition-colors">Allen</a> and I’m <a href="https://github.com/3kh0" target="_blank" rel="noopener noreferrer" class="text-blue font-semibold hover:text-blue/80 transition-colors">Echo</a>. We are running the security bounty program for Hack Club. This is a trial until <span class="font-semibold">September 30th</span>, and if it goes well, we will continue it indefinitely. Thank you for your help in keeping Hack Club secure!
-            </p>
-            <p>We both have backgrounds in earning security bounties and are excited to bring this to Hack Club.</p>
-            <ul class="list-disc list-inside space-y-1">
-              <li>
-                Allen earned a
-                <a href="https://ading.dev/blog/posts/chrome_sandbox_escape.html" target="_blank" rel="noopener noreferrer" class="font-bold text-blue hover:text-blue/80 transition-colors">$20k bounty for a Chromium bug</a>.
-              </li>
-              <li>Echo participated in the <span class="font-bold">Coinbase Security Bounty Program</span>.</li>
-            </ul>
+  <div class="min-h-screen text-white" style="padding: 32px 0;">
+    <div class="max-w-7xl mx-auto border border-white/20 px-6 bg-black">
+      <!-- Header -->
+      <header class="py-12 border-b border-gray-600">
+        <div class="text-center space-y-4">
+          <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Hack Club</h1>
+          <h2 class="text-2xl md:text-3xl font-light text-gray-400">Security program</h2>
+          <div id="c" class="hidden mt-6">
+            <div class="inline-flex items-center space-x-2 text-sm border border-gray-700 px-4 py-2 bg-gray-900">
+              <span class="text-gray-400">PAID OUT:</span>
+              <a href="https://hcb.hackclub.com/hack-club-security/transactions" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors">
+                $<span id="a"></span>
+              </a>
+            </div>
           </div>
         </div>
+      </header>
 
-        <div class="rounded-2xl my-8">
-          <h2 class="text-2xl font-bold mb-4 text-white">Participating Programs</h2>
-          <p class="text-xl text-secondary mb-6">Not all Hack Club programs are under this security program, so keep in mind what is open to testing. We are currently working with the following Hack Club programs:</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div v-for="program in programs" :key="program.id" class="p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-              <h3 class="text-lg font-bold text-white mb-2">{{ program.name }}</h3>
-              <p class="text-secondary text-sm mb-3">{{ program.description }}</p>
+      <!-- Introduction -->
+      <section class="py-12 border-b border-gray-600">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6 text-sm leading-relaxed font-mono">
+            <p>
+              TODO: PUT SOME SHIT HERE IDK, IMAGINE THIS IS A COOL INTRO THING OR SOMETHING IDK
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Participating Programs -->
+      <section class="py-12 border-b border-gray-600">
+        <h2 class="text-xl font-bold mb-8 font-mono tracking-wider">PARTICIPATING PROGRAMS</h2>
+        <p class="text-sm text-gray-400 mb-8 font-mono leading-relaxed">
+          NOT ALL HACK CLUB PROGRAMS ARE UNDER THIS SECURITY PROGRAM. 
+          KEEP IN MIND WHAT IS OPEN TO TESTING.
+        </p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div v-for="program in programs" :key="program.id" class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600">
+              <h3 class="font-bold font-mono text-sm tracking-wide">{{ program.name }}</h3>
+            </div>
+            <div class="p-4 space-y-3">
+              <p class="text-xs text-gray-400 font-mono leading-relaxed">{{ program.description }}</p>
               <div class="space-y-1">
-                <div v-for="domain in program.domains" :key="domain" class="text-xs text-primary font-mono bg-primary/10 px-2 py-1 rounded">
+                <div v-for="domain in program.domains" :key="domain" class="text-xs font-mono text-gray-300 border border-gray-700 px-2 py-1 bg-black/50">
                   {{ domain }}
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="rounded-2xl my-4">
-          <h2 class="text-2xl font-bold mb-4 text-white">PII Severity Definitions</h2>
-          <p class="text-xl text-secondary mb-4">One thing we have a lot here at Hack Club is information, and we want to make sure that it is well protected. We have defined the severity of the information based on how much it could be used to harm someone.</p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-            <div class="p-6 bg-red/10 border border-red/30 rounded-xl">
-              <h3 class="text-2xl font-bold text-red mb-4">Critical</h3>
-              <ul class="space-y-2 text-white text-lg">
-                <li>• Government-issued ID</li>
-                <li>• Identity verification documents</li>
-              </ul>
+      <!-- PII Severity Definitions -->
+      <section class="py-12 border-b border-gray-600">
+        <h2 class="text-xl font-bold mb-4 font-mono tracking-wider">PII SEVERITY DEFINITIONS</h2>
+        <p class="text-sm text-gray-400 mb-8 font-mono leading-relaxed max-w-4xl">
+          WE HAVE DEFINED THE SEVERITY OF INFORMATION BASED ON HOW MUCH IT COULD BE USED TO HARM SOMEONE.
+        </p>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 bg-gray-800/50">
+              <h3 class="text-sm font-bold font-mono">CRITICAL</h3>
             </div>
-
-            <div class="p-6 bg-orange/10 border border-orange/30 rounded-xl">
-              <h3 class="text-2xl font-bold text-orange mb-4">High Severity</h3>
-              <ul class="space-y-2 text-white text-lg">
-                <li>• Physical address</li>
-              </ul>
-            </div>
-
-            <div class="p-6 bg-yellow/10 border border-yellow/30 rounded-xl">
-              <h3 class="text-2xl font-bold text-yellow mb-4">Medium Severity</h3>
-              <ul class="space-y-2 text-white text-md">
-                <li>• Private email address on Hack Club platforms</li>
-                <li>• Phone numbers</li>
-                <li>• Birthday or age</li>
-              </ul>
-            </div>
-
-            <div class="p-6 bg-green/10 border border-green/30 rounded-xl">
-              <h3 class="text-2xl font-bold text-green mb-4">Low Severity</h3>
-              <ul class="space-y-2 text-white text-md">
-                <li>• IP addresses</li>
-                <li>• Legal names</li>
-                <li>• Non-public program information</li>
-              </ul>
+            <div class="p-4 space-y-2 text-xs font-mono text-gray-300">
+              <p>• GOVERNMENT-ISSUED ID</p>
+              <p>• IDENTITY VERIFICATION DOCS</p>
             </div>
           </div>
 
-          <div class="mb-4 p-6 bg-white/5 rounded-xl border border-white/10">
-            <p class="text-secondary text-lg">We define a leak as any person who has not signed a Hack Club NDA having access to the above data due to our systems failing to keep it safe. If the user self-declares any information covered in these tiers, it is not considered a vulnerability.</p>
-          </div>
-
-          <h2 class="text-2xl font-bold mb-4 text-white">Payout Tiers</h2>
-          <p class="text-xl text-secondary mb-4">As a thank you for helping us keep Hack Club secure, we are offering bounties for finding vulnerabilities in our systems. The payouts are based on the severity of the vulnerability and the impact it has on our users.</p>
-
-          <h3 class="text-xl font-bold mb-4 text-white">PII Bounty Tiers</h3>
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-            <div class="p-6 bg-orange/10 border border-orange/30 rounded-xl">
-              <div class="text-2xl font-bold text-orange mb-2">$300</div>
-              <div class="text-white text-lg mb-2">High severity PII leak</div>
-              <div class="text-md text-secondary">affecting 100+ people</div>
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 bg-gray-800/50">
+              <h3 class="text-sm font-bold font-mono">HIGH SEVERITY</h3>
             </div>
-
-            <div class="p-6 bg-yellow/10 border border-yellow/30 rounded-xl">
-              <div class="text-2xl font-bold text-yellow mb-2">$150</div>
-              <div class="text-white text-lg mb-2">Medium severity PII leak</div>
-              <div class="text-md text-secondary">affecting 50+ people</div>
-            </div>
-
-            <div class="p-6 bg-green/10 border border-green/30 rounded-xl">
-              <div class="text-2xl font-bold text-green mb-2">$50</div>
-              <div class="text-white text-lg mb-2">Medium severity (5+ people)</div>
-              <div class="text-md text-secondary">or Low severity (50+ people)</div>
-            </div>
-
-            <div class="p-6 bg-cyan/10 border border-cyan/30 rounded-xl">
-              <div class="text-xl font-bold text-cyan mb-2">$20</div>
-              <div class="text-white text-lg mb-2">Low severity PII leak</div>
-              <div class="text-md text-secondary">affecting 10+ people</div>
+            <div class="p-4 space-y-2 text-xs font-mono text-gray-300">
+              <p>• PHYSICAL ADDRESS</p>
             </div>
           </div>
 
-          <h3 class="text-xl font-bold my-4 text-white">Remote Code Execution</h3>
-          <div class="grid md:grid-cols-2 gap-4 my-4">
-            <div class="p-6 bg-red/10 border border-red/30 rounded-xl">
-              <div class="text-3xl font-bold text-red mb-2">$500</div>
-              <div class="text-white text-lg mb-2">Root access to servers</div>
-              <div class="text-md text-secondary">*.selfhosted.hackclub.com, hcb.hackclub.com, or admin access to vercel.com/@hackclub GitHub (outside Docker)</div>
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 bg-gray-800/50">
+              <h3 class="text-sm font-bold font-mono">MEDIUM SEVERITY</h3>
             </div>
-
-            <div class="p-6 bg-orange/10 border border-orange/30 rounded-xl">
-              <div class="text-2xl font-bold text-orange mb-2">$250</div>
-              <div class="text-white text-lg mb-2">Non-root access</div>
-              <div class="text-md text-secondary">to any of the above (outside Docker)</div>
+            <div class="p-4 space-y-2 text-xs font-mono text-gray-300">
+              <p>• PRIVATE EMAIL ADDRESS</p>
+              <p>• PHONE NUMBERS</p>
+              <p>• BIRTHDAY OR AGE</p>
             </div>
           </div>
 
-          <h3 class="text-xl font-bold my-4 text-white">Other Vulnerabilities</h3>
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="p-6 bg-red/10 border border-red/30 rounded-xl">
-              <div class="text-2xl font-bold text-red mb-2">$100</div>
-              <div class="text-white text-lg mb-2">Authentication Bypass</div>
-              <div class="text-md text-secondary">OAuth flaws, session management vulnerabilities, improper access controls</div>
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 bg-gray-800/50">
+              <h3 class="text-sm font-bold font-mono">LOW SEVERITY</h3>
             </div>
-
-            <div class="p-6 bg-purple/10 border border-purple/30 rounded-xl">
-              <div class="text-2xl font-bold text-purple mb-2">$100</div>
-              <div class="text-white text-lg mb-2">SQL Injection</div>
-              <div class="text-md text-secondary">Or any other exploit against Postgres or Airtable databases</div>
+            <div class="p-4 space-y-2 text-xs font-mono text-gray-300">
+              <p>• IP ADDRESSES</p>
+              <p>• LEGAL NAMES</p>
+              <p>• NON-PUBLIC PROGRAM INFO</p>
             </div>
-
-            <div class="p-6 bg-yellow/10 border border-yellow/30 rounded-xl">
-              <div class="text-xl font-bold text-yellow mb-2">$50</div>
-              <div class="text-white text-lg mb-2">Information Disclosure</div>
-              <div class="text-md text-secondary">Exposed admin panels, configuration issues</div>
-            </div>
-
-            <div class="p-6 bg-blue/10 border border-blue/30 rounded-xl">
-              <div class="text-lg font-bold text-blue mb-2">XSS & Others</div>
-              <div class="text-white text-lg mb-2">Cross-Site Scripting, CSRF, etc.</div>
-              <div class="text-md text-secondary">Paid according to PII impact (see above)</div>
-            </div>
-          </div>
-
-          <h3 class="text-xl font-bold my-4 text-white">Bonus</h3>
-          <div class="p-6 bg-green/10 border border-green/30 rounded-xl">
-            <div class="text-xl font-bold text-green mb-2">+25% bonus</div>
-            <div class="text-white text-lg mb-2">Include Fix with Report</div>
-            <div class="text-md text-secondary">Submit a git diff that fixes the vulnerability being reported</div>
           </div>
         </div>
 
-        <h2 class="text-2xl font-bold mb-4 text-white">Out of Scope</h2>
-        <p class="text-lg text-secondary mb-4">When reporting vulnerabilities, please consider attack scenario, and potential impact of the bug. Also note that any program not participating in this program is out of scope. While you are welcome to report issues regarding them, you are not guaranteed a payout. The following issues are generally considered to be out of scope (not an complete list):</p>
-        <div class="bg-primary/20 rounded-2xl p-6 border border-primary/30">
-          <div class="grid md:grid-cols-2 gap-6 text-lg">
-            <ul class="list-disc list-inside text-red space-y-2">
-              <li>Scraping public Slack information or account enumeration</li>
-              <li>Brute force attacks</li>
-              <li>Clickjacking without significant impact</li>
-              <li>Automated scanner outputs without real-world impact</li>
-            </ul>
-            <ul class="list-disc list-inside text-red space-y-2">
-              <li>Social engineering or phishing attacks</li>
-              <li>Self-exploitation requiring user interaction</li>
-              <li>Denial of Service causing resource exhaustion</li>
-              <li>Programs that are not participating in this program</li>
-            </ul>
-          </div>
+        <div class="border border-gray-700 bg-gray-900/20 p-6">
+          <p class="text-xs font-mono text-gray-400 leading-relaxed">
+            WE DEFINE A LEAK AS ANY PERSON WHO HAS NOT SIGNED A HACK CLUB NDA HAVING ACCESS TO THE ABOVE DATA 
+            DUE TO OUR SYSTEMS FAILING TO KEEP IT SAFE. IF THE USER SELF-DECLARES ANY INFORMATION COVERED IN 
+            THESE TIERS, IT IS NOT CONSIDERED A VULNERABILITY.
+          </p>
         </div>
+      </section>
 
-        <div class="my-4">
-          <h1 class="text-2xl font-bold mb-4 text-white">Notice for AI Generated Reports</h1>
-          <p class="text-lg text-secondary">Bounty programs have seen AI-generated submissions that lack any real-world impact. While the use of AI as a tool to help improve your report is allowed, submissions that are entirely AI-generated with no original researcher input will not be accepted. We are looking for original research with real-world impact. AI should support your research, not replace it.</p>
-        </div>
+      <!-- Payout Tiers -->
+      <section class="py-12 border-b border-gray-600">
+        <h2 class="text-xl font-bold mb-4 font-mono tracking-wider">PAYOUT TIERS</h2>
+        <p class="text-sm text-gray-400 mb-8 font-mono leading-relaxed max-w-4xl">
+          PAYOUTS ARE BASED ON THE SEVERITY OF THE VULNERABILITY AND THE IMPACT IT HAS ON OUR USERS.
+        </p>
 
-        <div class="grid md:grid-cols-2 gap-6 mt-4">
-          <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-            <h3 class="text-2xl font-bold mb-4 text-primary">How to Report</h3>
-            <p class="text-secondary mb-4">Submit vulnerabilities via this site, and we will pursue further contact via email</p>
-            <nuxt-link to="/submit" class="inline-block px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/80 transition-colors"> Submit Report → </nuxt-link>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-            <h3 class="text-2xl font-bold mb-4 text-green">Payout Options</h3>
-            <div class="space-y-2 text-secondary">
-              <div>Check by mail, Wise Transfers, HCB Visa Card, or cryptocurrency</div>
+        <!-- PII Bounty Tiers -->
+        <h3 class="text-lg font-bold mb-4 font-mono tracking-wide">PII BOUNTY TIERS</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-2xl font-bold font-mono">$300</div>
             </div>
-            <p class="text-md text-secondary mt-4">If these payout options do not work, we will try our best to figure out the best possible way to award you. The program in which the vulnerability is found will cover the cost of the payout.</p>
+            <div class="p-4 text-center">
+              <div class="text-xs font-mono text-gray-300 mb-2">HIGH SEVERITY PII LEAK</div>
+              <div class="text-xs font-mono text-gray-400">AFFECTING 100+ PEOPLE</div>
+            </div>
+          </div>
+
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-2xl font-bold font-mono">$150</div>
+            </div>
+            <div class="p-4 text-center">
+              <div class="text-xs font-mono text-gray-300 mb-2">MEDIUM SEVERITY PII LEAK</div>
+              <div class="text-xs font-mono text-gray-400">AFFECTING 50+ PEOPLE</div>
+            </div>
+          </div>
+
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-2xl font-bold font-mono">$50</div>
+            </div>
+            <div class="p-4 text-center">
+              <div class="text-xs font-mono text-gray-300 mb-2">MEDIUM SEVERITY (5+ PEOPLE)</div>
+              <div class="text-xs font-mono text-gray-400">OR LOW SEVERITY (50+ PEOPLE)</div>
+            </div>
+          </div>
+
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-xl font-bold font-mono">$20</div>
+            </div>
+            <div class="p-4 text-center">
+              <div class="text-xs font-mono text-gray-300 mb-2">LOW SEVERITY PII LEAK</div>
+              <div class="text-xs font-mono text-gray-400">AFFECTING 10+ PEOPLE</div>
+            </div>
           </div>
         </div>
-      </div>
+
+        <!-- Remote Code Execution -->
+        <h3 class="text-lg font-bold mb-4 font-mono tracking-wide">REMOTE CODE EXECUTION</h3>
+        <div class="grid md:grid-cols-2 gap-4 mb-8">
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-3xl font-bold font-mono">$500</div>
+            </div>
+            <div class="p-4">
+              <div class="text-xs font-mono text-gray-300 mb-2 text-center">ROOT ACCESS TO SERVERS</div>
+              <div class="text-xs font-mono text-gray-400 text-center">*.SELFHOSTED.HACKCLUB.COM, HCB.HACKCLUB.COM, OR ADMIN ACCESS TO VERCEL.COM/@HACKCLUB GITHUB (OUTSIDE DOCKER)</div>
+            </div>
+          </div>
+
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-2xl font-bold font-mono">$250</div>
+            </div>
+            <div class="p-4">
+              <div class="text-xs font-mono text-gray-300 mb-2 text-center">NON-ROOT ACCESS</div>
+              <div class="text-xs font-mono text-gray-400 text-center">TO ANY OF THE ABOVE (OUTSIDE DOCKER)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Other Vulnerabilities -->
+        <h3 class="text-lg font-bold mb-4 font-mono tracking-wide">OTHER VULNERABILITIES</h3>
+        <div class="grid md:grid-cols-2 gap-4 mb-8">
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-2xl font-bold font-mono">$100</div>
+            </div>
+            <div class="p-4">
+              <div class="text-xs font-mono text-gray-300 mb-2 text-center">AUTHENTICATION BYPASS</div>
+              <div class="text-xs font-mono text-gray-400 text-center">OAUTH FLAWS, SESSION MANAGEMENT VULNERABILITIES, IMPROPER ACCESS CONTROLS</div>
+            </div>
+          </div>
+
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-2xl font-bold font-mono">$100</div>
+            </div>
+            <div class="p-4">
+              <div class="text-xs font-mono text-gray-300 mb-2 text-center">SQL INJECTION</div>
+              <div class="text-xs font-mono text-gray-400 text-center">OR ANY OTHER EXPLOIT AGAINST POSTGRES OR AIRTABLE DATABASES</div>
+            </div>
+          </div>
+
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-xl font-bold font-mono">$50</div>
+            </div>
+            <div class="p-4">
+              <div class="text-xs font-mono text-gray-300 mb-2 text-center">INFORMATION DISCLOSURE</div>
+              <div class="text-xs font-mono text-gray-400 text-center">EXPOSED ADMIN PANELS, CONFIGURATION ISSUES</div>
+            </div>
+          </div>
+
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600 text-center">
+              <div class="text-lg font-bold font-mono">XSS & OTHERS</div>
+            </div>
+            <div class="p-4">
+              <div class="text-xs font-mono text-gray-300 mb-2 text-center">CROSS-SITE SCRIPTING, CSRF, ETC.</div>
+              <div class="text-xs font-mono text-gray-400 text-center">PAID ACCORDING TO PII IMPACT (SEE ABOVE)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bonus -->
+        <h3 class="text-lg font-bold mb-4 font-mono tracking-wide">BONUS</h3>
+        <div class="border border-gray-600 bg-gray-900/30">
+          <div class="p-4 border-b border-gray-600 text-center">
+            <div class="text-xl font-bold font-mono">+25% BONUS</div>
+          </div>
+          <div class="p-4">
+            <div class="text-xs font-mono text-gray-300 mb-2 text-center">INCLUDE FIX WITH REPORT</div>
+            <div class="text-xs font-mono text-gray-400 text-center">SUBMIT A GIT DIFF THAT FIXES THE VULNERABILITY BEING REPORTED</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Out of Scope -->
+      <section class="py-12 border-b border-gray-600">
+        <h2 class="text-xl font-bold mb-4 font-mono tracking-wider">OUT OF SCOPE</h2>
+        <p class="text-sm text-gray-400 mb-8 font-mono leading-relaxed max-w-4xl">
+          WHEN REPORTING VULNERABILITIES, PLEASE CONSIDER ATTACK SCENARIO, AND POTENTIAL IMPACT OF THE BUG. 
+          ALSO NOTE THAT ANY PROGRAM NOT PARTICIPATING IN THIS PROGRAM IS OUT OF SCOPE. WHILE YOU ARE WELCOME 
+          TO REPORT ISSUES REGARDING THEM, YOU ARE NOT GUARANTEED A PAYOUT.
+        </p>
+        <div class="border border-gray-600 bg-gray-900/30 p-6">
+          <div class="grid md:grid-cols-2 gap-6 text-xs font-mono">
+            <div class="space-y-2 text-gray-300">
+              <p>• SCRAPING PUBLIC SLACK INFORMATION OR ACCOUNT ENUMERATION</p>
+              <p>• BRUTE FORCE ATTACKS</p>
+              <p>• CLICKJACKING WITHOUT SIGNIFICANT IMPACT</p>
+              <p>• AUTOMATED SCANNER OUTPUTS WITHOUT REAL-WORLD IMPACT</p>
+            </div>
+            <div class="space-y-2 text-gray-300">
+              <p>• SOCIAL ENGINEERING OR PHISHING ATTACKS</p>
+              <p>• SELF-EXPLOITATION REQUIRING USER INTERACTION</p>
+              <p>• DENIAL OF SERVICE CAUSING RESOURCE EXHAUSTION</p>
+              <p>• PROGRAMS THAT ARE NOT PARTICIPATING IN THIS PROGRAM</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI Generated Reports Notice -->
+      <section class="py-12 border-b border-gray-600">
+        <h2 class="text-xl font-bold mb-4 font-mono tracking-wider">NOTICE FOR AI GENERATED REPORTS</h2>
+        <p class="text-sm text-gray-400 font-mono leading-relaxed max-w-4xl">
+          BOUNTY PROGRAMS HAVE SEEN AI-GENERATED SUBMISSIONS THAT LACK ANY REAL-WORLD IMPACT. 
+          WHILE THE USE OF AI AS A TOOL TO HELP IMPROVE YOUR REPORT IS ALLOWED, SUBMISSIONS 
+          THAT ARE ENTIRELY AI-GENERATED WITH NO ORIGINAL RESEARCHER INPUT WILL NOT BE ACCEPTED. 
+          WE ARE LOOKING FOR ORIGINAL RESEARCH WITH REAL-WORLD IMPACT. AI SHOULD SUPPORT YOUR RESEARCH, NOT REPLACE IT.
+        </p>
+      </section>
+
+      <!-- How to Report & Payout Options -->
+      <section class="py-12">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600">
+              <h3 class="text-lg font-bold font-mono tracking-wider">HOW TO REPORT</h3>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-sm text-gray-400 font-mono">
+                SUBMIT VULNERABILITIES VIA THIS SITE, AND WE WILL PURSUE FURTHER CONTACT VIA EMAIL
+              </p>
+              <nuxt-link to="/submit" class="inline-block border border-gray-700 bg-white text-black px-6 py-3 font-mono text-sm font-bold hover:bg-gray-200 transition-colors">
+                SUBMIT REPORT →
+              </nuxt-link>
+            </div>
+          </div>
+
+          <div class="border border-gray-600 bg-gray-900/30">
+            <div class="p-4 border-b border-gray-600">
+              <h3 class="text-lg font-bold font-mono tracking-wider">PAYOUT OPTIONS</h3>
+            </div>
+            <div class="p-6 space-y-4">
+              <div class="text-sm text-gray-400 font-mono">
+                CHECK BY MAIL, WISE TRANSFERS, HCB VISA CARD, OR CRYPTOCURRENCY
+              </div>
+              <p class="text-xs text-gray-400 font-mono leading-relaxed">
+                IF THESE PAYOUT OPTIONS DO NOT WORK, WE WILL TRY OUR BEST TO FIGURE OUT THE 
+                BEST POSSIBLE WAY TO AWARD YOU. THE PROGRAM IN WHICH THE VULNERABILITY IS FOUND 
+                WILL COVER THE COST OF THE PAYOUT.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>

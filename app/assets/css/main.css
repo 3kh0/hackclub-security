@@ -41,26 +41,48 @@
 }
 
 @theme {
-  /* hack clubs brand kit, stolen from their website :3 */
-  --color-darker: #121217;
-  --color-dark: #17171d;
-  --color-darkless: #252429;
-  --color-red: #ec3750;
-  --color-orange: #ff8c37;
-  --color-yellow: #f1c40f;
-  --color-green: #33d6a6;
-  --color-cyan: #5bc0de;
-  --color-blue: #338eda;
-  --color-purple: #a633d6;
-  --color-primary: #ec3750;
-  --color-secondary: #8492a6;
+  /* monochrome grid theme */
+  --color-black: #000000;
+  --color-dark: #111111;
+  --color-gray-900: #1a1a1a;
+  --color-gray-800: #262626;
+  --color-gray-700: #404040;
+  --color-gray-600: #525252;
+  --color-gray-500: #737373;
+  --color-gray-400: #a3a3a3;
+  --color-gray-300: #d4d4d4;
+  --color-gray-200: #e5e5e5;
+  --color-gray-100: #f5f5f5;
+  --color-white: #ffffff;
+  
+  /* accent colors - minimal use */
+  --color-accent: #ffffff;
+  --color-accent-muted: #a3a3a3;
+  
+  /* legacy color mapping for compatibility */
+  --color-darker: var(--color-black);
+  --color-darkless: var(--color-gray-900);
+  --color-primary: var(--color-white);
+  --color-secondary: var(--color-gray-400);
+  --color-red: var(--color-white);
+  --color-orange: var(--color-white);
+  --color-yellow: var(--color-white);
+  --color-green: var(--color-white);
+  --color-cyan: var(--color-white);
+  --color-blue: var(--color-white);
+  --color-purple: var(--color-white);
 }
 
 html,
 body {
-  background-color: var(--color-darker);
+  background-color: var(--color-black);
   color: var(--color-white);
-  font-family: "Phantom Sans", sans-serif;
+  font-family: "JetBrains Mono", "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.1) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,0.1) 2px, transparent 2px);
+  background-size: 32px 32px;
+  background-position: calc(50vw - 896px) 0, calc(50vw - 896px) 0;
 }
 
 .s {
