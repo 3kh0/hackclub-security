@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Phantom Sans";
+  src:
+    url("~/assets/fonts/Regular.woff2") format("woff2"),
+    url("~/assets/fonts/Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Phantom Sans";
+  src:
+    url("~/assets/fonts/Italic.woff2") format("woff2"),
+    url("~/assets/fonts/Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Phantom Sans";
+  src:
+    url("~/assets/fonts/Bold.woff2") format("woff2"),
+    url("~/assets/fonts/Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "minecraft";
+  src:
+    url("~/assets/fonts/minecraft.woff2") format("woff2"),
+    url("~/assets/fonts/minecraft.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* hack clubs brand kit, stolen from their website :3 */
+  --color-darker: #121217;
+  --color-dark: #17171d;
+  --color-darkless: #252429;
+  --color-red: #ec3750;
+  --color-orange: #ff8c37;
+  --color-yellow: #f1c40f;
+  --color-green: #33d6a6;
+  --color-cyan: #5bc0de;
+  --color-blue: #338eda;
+  --color-purple: #a633d6;
+  --color-primary: #ec3750;
+  --color-secondary: #8492a6;
+}
+
+html,
+body {
+  background-color: var(--color-darker);
+  color: var(--color-white);
+  font-family: "Phantom Sans", sans-serif;
+}
+
+.s {
+  animation: s 1.5s infinite;
+}
+
+@keyframes s {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

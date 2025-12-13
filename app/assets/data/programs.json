@@ -1,0 +1,56 @@
+[
+  {
+    "id": "hcb",
+    "name": "HCB",
+    "description": "Fiscal sponsorship platform for student organizations and non-profits",
+    "domains": ["hcb.hackclub.com", "bank.engineering"]
+  },
+  {
+    "id": "hackclub-com",
+    "name": "Hack Club Website",
+    "description": "Main homepage for Hack Club",
+    "domains": ["hackclub.com"]
+  },
+  {
+    "id": "moonshot",
+    "name": "Moonshot",
+    "description": "You and 100 Hack Clubbers will fly to Orlando, Florida, December 12–15.",
+    "domains": ["moonshot.hackclub.com"]
+  },
+  {
+    "id": "blueprint",
+    "name": "Blueprint",
+    "description": "Design a hardware project, and we'll pay for hardware to build it!",
+    "domains": ["blueprint.hackclub.com"]
+  },
+  {
+    "id": "shiba",
+    "name": "Shiba",
+    "description": "Make a game. Build an arcade in Tokyo.",
+    "domains": ["shiba.hackclub.com"]
+  },
+  {
+    "id": "clubs",
+    "name": "Clubs",
+    "description": "Hack Club's coding club network of over 900+ clubs worldwide",
+    "domains": ["dashboard.hackclub.com", "toolbox.hackclub.com"]
+  },
+  {
+    "id": "summer-of-making",
+    "name": "Summer of Making",
+    "description": "Hack Club's Flagship Summer event for 2025",
+    "domains": ["summer.hackclub.com"]
+  },
+  {
+    "id": "hackatime",
+    "name": "Hackatime",
+    "description": "Hack Club's in-house time tracking software",
+    "domains": ["hackatime.hackclub.com"]
+  },
+  {
+    "id": "identity",
+    "name": "Hack Club Identity",
+    "description": "Hack Club's Identity Verification Platform, also known as Identity Vault",
+    "domains": ["identity.hackclub.com"]
+  }
+]
