@@ -1,5 +1,4 @@
-import { Catbox } from 'node-catbox'
-import { Readable } from 'stream'
+import { Blob } from 'buffer'
 import { shoot } from './../utils/email'
 
 export default defineEventHandler(async (event) => {
@@ -163,8 +162,7 @@ Description: ${data.description}`
     }
   } else {
     try {
-      const catbox = new Catbox(config.catbox)
-      const buffer = Buffer.from(`Security Report: ${data.title}
+      const reportContent = `Security Report: ${data.title}
 Submission ID: ${submission.id}
 Reporter: ${data.name}
 Email: ${data.email}
@@ -176,14 +174,26 @@ Region: ${getRegion(data.region)}
 Submitted: ${submission.timestamp}
 
 Description:
-${data.description}`, 'utf-8')
+${data.description}`
 
-      const upload = await catbox.uploadFileStream({
-        stream: Readable.from(buffer),
-        filename: `${submission.id}.txt`
+      const blob = new Blob([reportContent], { type: 'text/plain' })
+      const formData = new FormData()
+      formData.append('file', blob, `${submission.id}.txt`)
+
+      const cdnResponse = await fetch('https://cdn.hackclub.com/api/v4/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${config.hackclubcdn}`
+        },
+        body: formData
       })
-      
-      link = upload
+
+      if (!cdnResponse.ok) {
+        throw new Error(`CDN upload failed: ${cdnResponse.status}`)
+      }
+
+      const result = await cdnResponse.json()
+      link = result.url
     } catch (error) {
       console.error('shit ', error)
       link = `check logs, upload failed`

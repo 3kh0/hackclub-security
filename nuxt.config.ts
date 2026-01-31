@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     tprivate: process.env.TURNSTILE_SECRET_KEY,
     webhook: process.env.SLACK_WEBHOOK_URL,
     ekey: process.env.RESEND_API_KEY,
-    catbox: process.env.CATBOX_API_KEY,
+    hackclubcdn: process.env.HACKCLUB_CDN_API_KEY,
     public: {
       tpublic: process.env.TURNSTILE_SITE_KEY
     }

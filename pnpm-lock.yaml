@@ -26,9 +26,6 @@ importers:
       eslint:
         specifier: ^9.38.0
         version: 9.38.0(jiti@2.6.1)
-      node-catbox:
-        specifier: ^3.4.0
-        version: 3.4.0
       nuxt:
         specifier: ^4.2.0
         version: 4.2.0(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.0.15)(@vue/compiler-sfc@3.5.22)(db0@0.3.4)(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.52.5)(terser@5.44.0)(typescript@5.8.3)(vite@7.1.12(@types/node@24.0.15)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.1))(yaml@2.8.1)
@@ -3241,10 +3238,6 @@ packages:
 
   node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
-
-  node-catbox@3.4.0:
-    resolution: {integrity: sha512-tM/2NvUI4tgAklfbpSzduJaaTQYAMJEMxyQWMUSnFWpMZa+RfJX9FAI2cHnKjAMnr2YWnz9lCVcveKcfLT8Ecg==}
-    engines: {node: '>=19'}
 
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
@@ -8285,8 +8278,6 @@ snapshots:
     optional: true
 
   node-addon-api@7.1.1: {}
-
-  node-catbox@3.4.0: {}
 
   node-domexception@1.0.0:
     optional: true
