@@ -108,15 +108,18 @@ export default defineEventHandler(async (event) => {
   let summary = 'AI fucked up :('
   if (!ishcb) {
     try {
-      const ai = await fetch('https://ai.hackclub.com/chat/completions', {
+      const config = useRuntimeConfig()
+      const ai = await fetch('https://ai.hackclub.com/proxy/v1/chat/completions', {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${config.ai_key}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          model: 'x-ai/grok-4.1-fast',
           messages: [{
             role: 'user',
-            content: `Please provide a 2-3 sentence technical summary of this security vulnerability report. Focus on the key technical details and potential impact:/no_think
+            content: `Please provide a 2-3 sentence technical summary of this security vulnerability report. Focus on the key technical details and potential impact:
 
 Title: ${data.title}
 Type: ${getType(data.vulnType)}
