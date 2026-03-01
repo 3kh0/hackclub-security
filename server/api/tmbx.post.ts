@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     })
   }
   
-  const required = ['name', 'email', 'region', 'affectedPrograms', 'vulnType', 'title', 'description', 'cvssScore', 'severity']
+  const required = ['name', 'email', 'region', 'affectedPrograms', 'vulnType', 'title', 'description']
   const missing = required.filter(field => {
     if (field === 'affectedPrograms') {
       return !body[field] || !Array.isArray(body[field]) || body[field].length === 0
@@ -45,13 +45,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  if (typeof body.cvssScore !== 'number' || body.cvssScore < 0 || body.cvssScore > 10) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Invalid CVSS score'
-    })
-  }
-  
   const vulnTypes = [
     'rce-root', 'rce-nonroot', 'auth-bypass', 'sqli', 
     'pii-critical', 'pii-high', 'pii-medium', 'pii-low',
@@ -64,14 +57,6 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const severities = ['critical', 'high', 'medium', 'low', 'none']
-  if (!severities.includes(body.severity)) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Invalid severity level'
-    })
-  }
-  
   const data = {
     name: body.name.trim().substring(0, 100),
     email: body.email.trim().toLowerCase().substring(0, 100),
@@ -84,12 +69,15 @@ export default defineEventHandler(async (event) => {
     }) : [],
     vulnType: body.vulnType,
     title: body.title.trim().substring(0, 200),
-    description: body.description.trim().substring(0, 10000),
-    cvssScore: Number(body.cvssScore),
-    severity: body.severity
+    description: body.description.trim().substring(0, 10000)
   }
   
-  const submission = {
+  const submission: {
+    timestamp: string
+    id: string
+    reporter: { name: string; email: string }
+    vulnerability: typeof data & { severity?: string }
+  } = {
     timestamp: new Date().toISOString(),
     id: `SEC-${Date.now()}`,
     reporter: {
@@ -98,6 +86,43 @@ export default defineEventHandler(async (event) => {
     },
     vulnerability: data
   }
+
+  let severity = 'medium'
+  try {
+    const config2 = useRuntimeConfig()
+    const severityAi = await fetch('https://ai.hackclub.com/proxy/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${config2.ai_key}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'x-ai/grok-4.1-fast',
+        messages: [{
+          role: 'user',
+          content: `Based on the following security vulnerability report, classify its severity as exactly one of: critical, high, medium, low, none. Respond with ONLY the single word severity level, nothing else.
+
+Title: ${data.title}
+Type: ${getType(data.vulnType)}
+Affected Programs: ${data.affectedPrograms.join(', ')}
+Description: ${data.description}`
+        }]
+      })
+    })
+    
+    if (severityAi.ok) {
+      const result = await severityAi.json()
+      const raw = (result.choices?.[0]?.message?.content || '').trim().toLowerCase()
+      const valid = ['critical', 'high', 'medium', 'low', 'none']
+      if (valid.includes(raw)) {
+        severity = raw
+      }
+    }
+  } catch (error) {
+    console.error('AI severity error:', error)
+  }
+
+  submission.vulnerability = { ...data, severity }
   
   const payout = getPayout(data.vulnType, false)
   // cuz they wanna be supa special or something
@@ -123,7 +148,6 @@ export default defineEventHandler(async (event) => {
 
 Title: ${data.title}
 Type: ${getType(data.vulnType)}
-CVSS Score: ${data.cvssScore}
 Affected Programs: ${data.affectedPrograms.join(', ')}
 Description: ${data.description}`
           }]
@@ -150,8 +174,7 @@ Description: ${data.description}`
         name: data.name,
         email: data.email,
         vulnType: getType(data.vulnType),
-        cvssScore: data.cvssScore,
-        severity: data.severity,
+        severity: severity,
         affectedPrograms: data.affectedPrograms,
         region: getRegion(data.region),
         timestamp: submission.timestamp,
@@ -170,8 +193,7 @@ Submission ID: ${submission.id}
 Reporter: ${data.name}
 Email: ${data.email}
 Vulnerability Type: ${getType(data.vulnType)}
-CVSS Score: ${data.cvssScore}
-Severity: ${data.severity}
+Severity: ${severity}
 Affected Programs: ${data.affectedPrograms.join(', ')}
 Region: ${getRegion(data.region)}
 Submitted: ${submission.timestamp}
@@ -222,7 +244,7 @@ ${data.description}`
           },
           {
             type: "mrkdwn",
-            text: `*Score:*\n${data.cvssScore}`
+            text: `*Severity:*\n${severity}`
           },
           {
             type: "mrkdwn",

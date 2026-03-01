@@ -7,7 +7,6 @@ export async function shoot(
     name: string
     email: string
     vulnType: string
-    cvssScore: number
     severity: string
     affectedPrograms: string[]
     region: string
@@ -24,7 +23,6 @@ ID: ${data.id}
 Reporter: ${data.name}
 Email: ${data.email}
 Type: ${data.vulnType}
-CVSS Score: ${data.cvssScore}
 Severity: ${data.severity}
 Assets: ${data.affectedPrograms.join(', ')}
 Region: ${data.region}

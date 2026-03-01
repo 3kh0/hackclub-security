@@ -178,96 +178,6 @@
 
           <div v-if="s === 3" class="space-y-6">
             <div class="mb-6">
-              <h3 class="text-3xl font-bold text-white mb-2">How bad is it?</h3>
-              <p class="text-lg text-secondary">
-                Answer these questions to calculate the severity, or manually enter a score if you prefer. We will also take into account the context of the vulnerability.
-                We are using the CVSS 3.0 framework,
-                <a href="https://www.first.org/cvss/v3-0/specification-document" target="_blank" rel="noopener" class="text-primary underline hover:text-primary/80">learn more here</a>.
-              </p>
-            </div>
-
-            <div class="flex items-center space-x-4 mb-6 text-lg">
-              <label class="flex items-center space-x-2">
-                <input 
-                  v-model="m"
-                  type="radio" 
-                  value="calculator"
-                  class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary"
-                >
-                <span class="text-white">Use CVSS Calculator</span>
-              </label>
-              <label class="flex items-center space-x-2 ">
-                <input 
-                  v-model="m"
-                  type="radio" 
-                  value="manual"
-                  class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary"
-                >
-                <span class="text-white">Manual Score Entry</span>
-              </label>
-            </div>
-
-            <div v-if="m === 'calculator'" class="space-y-4">
-              <div v-for="metric in cvssMetrics" :key="metric.key" class="bg-white/5 p-4 rounded-lg">
-                <label class="block text-lg text-white font-medium mb-2">{{ metric.label }}</label>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  <label 
-                    v-for="option in metric.options" 
-                    :key="option.value"
-                    class="flex items-center space-x-2 cursor-pointer p-2 rounded border transition-colors"
-                    :class="form.cvss[metric.key] === option.value 
-                      ? 'bg-primary/20 border-primary text-white' 
-                      : 'border-darkless text-secondary hover:border-white/40'"
-                  >
-                    <input 
-                      v-model="form.cvss[metric.key]"
-                      type="radio" 
-                      :value="option.value"
-                      class="w-4 h-4 text-primary bg-darker border-darkless focus:ring-primary"
-                    >
-                    <span class="text-sm">{{ option.label }}</span>
-                  </label>
-                </div>
-              </div>
-
-              <div class="bg-green/10 border border-green/30 p-4 rounded-lg">
-                <div class="flex items-center justify-between">
-                  <span class="text-white font-medium">Calculated CVSS Score:</span>
-                  <span class="text-2xl font-bold text-green">{{ q }}</span>
-                </div>
-                <div class="text-md text-secondary mt-1">
-                  Severity: <span :class="c(q)" class="font-medium">{{ l(q) }}</span>
-                </div>
-              </div>
-            </div>
-
-            <div v-if="m === 'manual'" class="space-y-4">
-              <div>
-                <label class="block text-lg text-white font-medium mb-2">CVSS Score (0.0 - 10.0)</label>
-                <input 
-                  v-model.number="form.manualCvss" 
-                  type="number" 
-                  min="0" 
-                  max="10" 
-                  step="0.1"
-                  class="w-full p-3 rounded-lg bg-darker border border-darkless text-lg text-white focus:border-primary focus:outline-none"
-                  placeholder="e.g., 7.5"
-                >
-              </div>
-              <div v-if="form.manualCvss" class="bg-green/10 border border-green/30 p-4 rounded-lg">
-                <div class="flex items-center justify-between">
-                  <span class="text-white font-medium">Manual CVSS Score:</span>
-                  <span class="text-2xl font-bold text-green">{{ form.manualCvss }}</span>
-                </div>
-                <div class="text-md text-secondary mt-1">
-                  Severity: <span :class="c(form.manualCvss)" class="font-medium">{{ l(form.manualCvss) }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div v-if="s === 4" class="space-y-6">
-            <div class="mb-6">
               <h3 class="text-3xl font-bold text-white mb-2">Now for the detailed report</h3>
               <p class="text-secondary">Provide a clear title and comprehensive description of the vulnerability.</p>
             </div>
@@ -294,7 +204,7 @@
             </div>
           </div>
 
-          <div v-if="s === 5" class="space-y-6">
+          <div v-if="s === 4" class="space-y-6">
             <div class="mb-6">
               <h3 class="text-3xl font-bold text-white mb-2">Final step: Security verification</h3>
               <p class="text-secondary">Complete the CAPTCHA to verify you're human and submit your report.</p>
@@ -318,10 +228,6 @@
                 <div>
                   <span class="text-secondary">Vulnerability Type:</span>
                   <span class="text-white ml-2">{{ f() }}</span>
-                </div>
-                <div>
-                  <span class="text-secondary">CVSS Score:</span>
-                  <span class="text-white ml-2">{{ h() }} ({{ l(h()) }})</span>
                 </div>
                 <div>
                   <span class="text-secondary">Estimated Payout:</span>
@@ -355,7 +261,7 @@
                 :disabled="!canProceed"
                 class="px-8 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {{ s === 5 ? 'Submit Report' : 'Next →' }}
+                {{ s === 4 ? 'Submit Report' : 'Next →' }}
               </button>
             </div>
           </div>
@@ -405,7 +311,6 @@
 <script setup>
 import { ref, reactive, onMounted, computed, nextTick } from 'vue'
 import p from '@/assets/data/programs.json'
-import { a, calc, l, c } from '~/utils/cvss'
 
 useHead({
   title: 'Submit Security Report - Hack Club Security Program',
@@ -425,14 +330,12 @@ const config = useRuntimeConfig()
 const t = ref('')
 const k = config.public.tpublic
 const s = ref(0)
-const m = ref('calculator')
 const turnstile = ref(false)
 
 const steps = [
   { title: 'Contact Info' },
   { title: 'Programs' },
   { title: 'Vulnerability' },
-  { title: 'Severity' },
   { title: 'Details' },
   { title: 'Submit' }
 ]
@@ -450,8 +353,6 @@ const v = [
   { id: 'xss', name: 'Cross-Site Scripting', description: 'XSS, CSRF, and similar client-side attacks', payout: 'Variable' },
   { id: 'other', name: 'Other Vulnerability', description: 'Other issue not listed above, be prepared to describe it later', payout: 'Variable' }
 ]
-
-const cvssMetrics = a
 
 const form = reactive({
   name: '',
@@ -476,21 +377,6 @@ const form = reactive({
 
   * List any additional screenshots, logs, or videos
   * If this vulnerability affects your account, please include the email address tied to it.`,
-  cvss: {
-    attackVector: '',
-    attackComplexity: '',
-    privilegesRequired: '',
-    userInteraction: '',
-    scope: '',
-    confidentiality: '',
-    integrity: '',
-    availability: ''
-  },
-  manualCvss: null
-})
-
-const q = computed(() => {
-  return calc(form.cvss)
 })
 
 const canProceed = computed(() => {
@@ -502,10 +388,8 @@ const canProceed = computed(() => {
     case 2:
       return form.vulnType
     case 3:
-      return m.value === 'manual' ? form.manualCvss !== null : q.value > 0
-    case 4:
       return form.title && form.description
-    case 5:
+    case 4:
       return true
     default:
       return false
@@ -578,8 +462,6 @@ const w = async () => {
     vulnType: form.vulnType,
     title: form.title,
     description: form.description,
-    cvssScore: h(),
-    severity: l(h()).toLowerCase(),
     turnstileToken: t.value
   }
   
@@ -664,10 +546,6 @@ const w = async () => {
   } finally {
     x.value = false
   }
-}
-
-const h = () => {
-  return m.value === 'manual' ? form.manualCvss : q.value
 }
 
 const d = (region) => {
