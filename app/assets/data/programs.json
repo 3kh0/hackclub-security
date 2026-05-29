@@ -13,22 +13,16 @@
     "domains": ["hackclub.com"]
   },
   {
-    "id": "moonshot",
-    "name": "Moonshot",
-    "description": "You and 100 Hack Clubbers will fly to Orlando, Florida, December 12–15.",
-    "domains": ["moonshot.hackclub.com"]
+    "id": "attend",
+    "name": "Attend",
+    "description": "Hack Club's event management system",
+    "domains": ["attend.hackclub.com"]
   },
   {
     "id": "blueprint",
     "name": "Blueprint",
     "description": "Design a hardware project, and we'll pay for hardware to build it!",
     "domains": ["blueprint.hackclub.com"]
-  },
-  {
-    "id": "shiba",
-    "name": "Shiba",
-    "description": "Make a game. Build an arcade in Tokyo.",
-    "domains": ["shiba.hackclub.com"]
   },
   {
     "id": "clubs",
@@ -43,15 +37,21 @@
     "domains": ["flavortown.hackclub.com"]
   },
   {
+    "id": "stardance",
+    "name": "Stardance",
+    "description": "Hack Club and NASA's Flagship Summer event for 2026",
+    "domains": ["stardance.hackclub.com"]
+  },
+  {
     "id": "hackatime",
     "name": "Hackatime",
     "description": "Hack Club's in-house time tracking software",
     "domains": ["hackatime.hackclub.com"]
   },
   {
-    "id": "identity",
-    "name": "Hack Club Identity",
-    "description": "Hack Club's Identity Verification Platform, also known as Identity Vault",
-    "domains": ["identity.hackclub.com"]
+    "id": "auth",
+    "name": "Hack Club Auth",
+    "description": "Hack Club's Identity Verification Platform, also known as Hack Club Account/Identity",
+    "domains": ["auth.hackclub.com"]
   }
 ]
