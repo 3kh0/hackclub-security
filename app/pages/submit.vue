@@ -520,8 +520,12 @@ const w = async () => {
     
     s.value = 0
     t.value = ''
-    if (window.turnstile) {
-      window.turnstile.reset()
+    try {
+      if (window.turnstile) {
+        window.turnstile.reset()
+      }
+    } catch {
+      // container was removed; ignore
     }
     
     setTimeout(() => {
@@ -546,7 +550,11 @@ const w = async () => {
     
     if (window.turnstile) {
       setTimeout(() => {
-        window.turnstile.reset()
+        try {
+          window.turnstile.reset()
+        } catch {
+          // container was removed; ignore
+        }
         t.value = ''
       }, 1000)
     }
