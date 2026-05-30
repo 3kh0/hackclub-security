@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     ekey: process.env.RESEND_API_KEY,
     hackclubcdn: process.env.HACKCLUB_CDN_API_KEY,
     ai_key: process.env.AI_MODEL_KEY,
+    xai_key: process.env.XAI_API_KEY,
     public: {
       tpublic: process.env.TURNSTILE_SITE_KEY
     }

@@ -89,34 +89,15 @@ export default defineEventHandler(async (event) => {
 
   let severity = 'medium'
   try {
-    const config2 = useRuntimeConfig()
-    const severityAi = await fetch('https://ai.hackclub.com/proxy/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${config2.ai_key}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'google/gemini-2.5-flash',
-        messages: [{
-          role: 'user',
-          content: `Based on the following security vulnerability report, classify its severity as exactly one of: critical, high, medium, low, none. Respond with ONLY the single word severity level, nothing else.
+    const raw = (await aiChat(`Based on the following security vulnerability report, classify its severity as exactly one of: critical, high, medium, low, none. Respond with ONLY the single word severity level, nothing else.
 
 Title: ${data.title}
 Type: ${getType(data.vulnType)}
 Affected Programs: ${data.affectedPrograms.join(', ')}
-Description: ${data.description}`
-        }]
-      })
-    })
-    
-    if (severityAi.ok) {
-      const result = await severityAi.json()
-      const raw = (result.choices?.[0]?.message?.content || '').trim().toLowerCase()
-      const valid = ['critical', 'high', 'medium', 'low', 'none']
-      if (valid.includes(raw)) {
-        severity = raw
-      }
+Description: ${data.description}`, config, 0) || '').trim().toLowerCase()
+    const valid = ['critical', 'high', 'medium', 'low', 'none']
+    if (valid.includes(raw)) {
+      severity = raw
     }
   } catch (error) {
     console.error('AI severity error:', error)
@@ -133,30 +114,14 @@ Description: ${data.description}`
   let summary = 'AI fucked up :('
   if (!ishcb) {
     try {
-      const config = useRuntimeConfig()
-      const ai = await fetch('https://ai.hackclub.com/proxy/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${config.ai_key}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'google/gemini-2.5-flash',
-          messages: [{
-            role: 'user',
-            content: `Please provide a 2-3 sentence technical summary of this security vulnerability report. Focus on the key technical details and potential impact:
+      const result = await aiChat(`Please provide a concise 2-3 sentence technical summary of this security vulnerability report. Focus on the key technical details and potential impact. Respond with plain prose only, no markdown headers or bullet points:
 
 Title: ${data.title}
 Type: ${getType(data.vulnType)}
 Affected Programs: ${data.affectedPrograms.join(', ')}
-Description: ${data.description}`
-          }]
-        })
-      })
-      
-      if (ai.ok) {
-        const result = await ai.json()
-        summary = result.choices?.[0]?.message?.content || 'AI summary generation failed'
+Description: ${data.description}`, config)
+      if (result) {
+        summary = result
       }
     } catch (error) {
       console.error('AI error:', error)
@@ -385,6 +350,65 @@ function getRegion(region: string): string {
   }
   
   return regions[region] || region
+}
+
+async function aiChat(content: string, config: { ai_key?: string; xai_key?: string }, temperature = 0.3): Promise<string | null> {
+  try {
+    const res = await fetch('https://ai.hackclub.com/proxy/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${config.ai_key}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-2.5-flash',
+        messages: [{ role: 'user', content }]
+      })
+    })
+
+    if (res.ok) {
+      const result = await res.json()
+      const out = result.choices?.[0]?.message?.content
+      if (out) return out
+      console.error('ai.hackclub.com returned no content, falling back to x.ai')
+    } else {
+      console.error(`ai.hackclub.com failed (${res.status}), falling back to x.ai`)
+    }
+  } catch (error) {
+    console.error('ai.hackclub.com error, falling back to x.ai:', error)
+  }
+
+  if (!config.xai_key) {
+    console.error('x.ai fallback unavailable: XAI_API_KEY not set')
+    return null
+  }
+  try {
+    const res = await fetch('https://api.x.ai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${config.xai_key}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'grok-4.20-0309-non-reasoning',
+        temperature,
+        messages: [{ role: 'user', content }]
+      })
+    })
+
+    if (res.ok) {
+      const result = await res.json()
+      const out = result.choices?.[0]?.message?.content
+      if (out) return out
+      console.error('x.ai fallback returned no content')
+    } else {
+      console.error(`x.ai fallback failed (${res.status})`)
+    }
+  } catch (error) {
+    console.error('x.ai fallback error:', error)
+  }
+
+  return null
 }
 
 async function verifyTurnstile(token: string, key: string): Promise<{ success: boolean }> {
