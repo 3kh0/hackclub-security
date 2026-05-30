@@ -97,7 +97,7 @@ export default defineEventHandler(async (event) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'x-ai/grok-4.1-fast',
+        model: 'google/gemini-2.5-flash',
         messages: [{
           role: 'user',
           content: `Based on the following security vulnerability report, classify its severity as exactly one of: critical, high, medium, low, none. Respond with ONLY the single word severity level, nothing else.
@@ -141,7 +141,7 @@ Description: ${data.description}`
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'x-ai/grok-4.1-fast',
+          model: 'google/gemini-2.5-flash',
           messages: [{
             role: 'user',
             content: `Please provide a 2-3 sentence technical summary of this security vulnerability report. Focus on the key technical details and potential impact:
